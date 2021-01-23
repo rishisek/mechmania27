@@ -10,26 +10,6 @@ public class Crop {
     @Expose
     private double value;
 
-    public Crop(CropType type) {
-        this.type = type;
-        this.growthTimer = type.getTimeToGrow();
-        this.value = 0;
-    }
-
-    public Crop(Crop other) {
-        this.type = other.type;
-        this.growthTimer = other.growthTimer;
-        this.value = other.value;
-    }
-
-    /** Increases this crop's value based on the multiplier and decrements the growthTimer if crop is still growing */
-    public void grow(double multiplier){
-        if(growthTimer > 0) {
-            value += type.getValueGrowth() * multiplier;
-            growthTimer--;
-        }
-    }
-
     public double getValue() {
         return value;
     }
@@ -40,13 +20,5 @@ public class Crop {
 
     public CropType getType() {
         return type;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public void setGrowthTimer(int growthTimer) {
-        this.growthTimer = growthTimer;
     }
 }

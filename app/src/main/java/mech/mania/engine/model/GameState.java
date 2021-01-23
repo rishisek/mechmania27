@@ -18,41 +18,8 @@ public class GameState {
     @Expose
     private int playerNum;
 
-    private Config gameConfig;
-
-    public GameState(Config gameConfig,
-                     String player1Name, ItemType player1Item, UpgradeType player1UpgradeType,
-                     String player2Name, ItemType player2Item, UpgradeType player2UpgradeType) {
-        this.gameConfig = gameConfig;
-
-        this.turn = 1;
-        int startingMoney = gameConfig.STARTING_MONEY;
-        Position player1Position = new Position(0, 0);
-        Position player2Position = new Position(gameConfig.BOARD_WIDTH - 1, 0);
-
-        Player player1 = new Player(player1Name, player1Position, player1Item, player1UpgradeType, startingMoney, gameConfig);
-        Player player2 = new Player(player2Name, player2Position, player2Item, player2UpgradeType, startingMoney, gameConfig);
-
-        this.player1 = player1;
-        this.player2 = player2;
-
-        this.tileMap = new TileMap(gameConfig, player1, player2);
-    }
-
-    public GameState(GameState other) {
-        this.gameConfig = other.gameConfig;
-        this.turn = other.turn;
-        this.player1 = new Player(other.player1);
-        this.player2 = new Player(other.player2);
-        this.tileMap = new TileMap(other.tileMap);
-    }
-
     public int getTurn() {
         return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
     }
 
     public TileMap getTileMap() {
@@ -79,9 +46,5 @@ public class GameState {
             return player2;
         }
         return player1;
-    }
-
-    public void setPlayerNum(int playerNum) {
-        this.playerNum = playerNum;
     }
 }
