@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tile {
     @Expose
-    private TileType type;
+    private String type;
     @Expose
     private Crop crop;
     @Expose
     @SerializedName("p1_item")
-    private ItemType p1Item;
+    private String p1Item;
     @Expose
     @SerializedName("p2_item")
-    private ItemType p2Item;
+    private String p2Item;
 
     private int turnsLeftToGrow;
     private Player planter;
@@ -23,7 +23,7 @@ public class Tile {
     private boolean pesticideEffect = false;
     private boolean scarecrowEffect = false;
 
-    public TileType getType() {
+    public String getType() {
         return type;
     }
 
@@ -47,11 +47,11 @@ public class Tile {
         return crop;
     }
 
-    public ItemType getP1Item() {
+    public String getP1Item() {
         return p1Item;
     }
 
-    public ItemType getP2Item() {
+    public String getP2Item() {
         return p2Item;
     }
 

@@ -27,11 +27,11 @@ public class TileMap implements Iterable<Tile> {
         return pos.getX() >= 0 && pos.getX() < mapWidth && pos.getY() >= 0 && pos.getY() < mapHeight;
     }
 
-    public TileType getTileType(Position pos) {
+    public String getTileType(Position pos) {
         return get(pos).getType();
     }
 
-    public Tile getTile(Position pos) {
+    public Tile get(Position pos) {
         if (isValidPosition(pos)) {
             return tiles.get(pos.getX()).get(pos.getY());
         }

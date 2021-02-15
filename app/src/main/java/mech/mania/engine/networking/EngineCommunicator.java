@@ -14,6 +14,6 @@ public final class EngineCommunicator {
      *
      */
     public static void sendString(String string) {
-        System.out.println(s);
+        System.out.println(string);
     }
 }

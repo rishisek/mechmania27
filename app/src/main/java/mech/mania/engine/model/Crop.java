@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 
 public class Crop {
     @Expose
-    private CropType type;
+    private String type;
     @Expose
     private int growthTimer; // This is a down-counter (i.e. 0 means fully grown)
     @Expose
@@ -18,7 +18,7 @@ public class Crop {
         return growthTimer;
     }
 
-    public CropType getType() {
+    public String getType() {
         return type;
     }
 }

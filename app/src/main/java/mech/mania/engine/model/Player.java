@@ -11,13 +11,13 @@ public class Player {
     @Expose
     private Position position;
     @Expose
-    private ItemType item;
+    private String item;
     @Expose
-    private UpgradeType upgrade;
+    private String upgrade;
     @Expose
     private double money;
     @Expose
-    private Map<CropType, Integer> seedInventory = new HashMap<>();
+    private Map<String, Integer> seedInventory = new HashMap<>();
     @Expose
     private ArrayList<Crop> harvestedInventory = new ArrayList<>();
 
@@ -26,11 +26,11 @@ public class Player {
         return money;
     }
 
-    public UpgradeType getUpgrade() {
+    public String getUpgrade() {
         return upgrade;
     }
 
-    public ItemType getItem() {
+    public String getItem() {
         return item;
     }
 
@@ -46,7 +46,7 @@ public class Player {
         return harvestedInventory;
     }
 
-    public Map<CropType, Integer> getSeeds() {
+    public Map<String, Integer> getSeeds() {
         return this.seedInventory;
     }
 }

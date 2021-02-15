@@ -2,7 +2,6 @@ package mech.mania.engine.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import mech.mania.engine.config.Config;
 
 public class GameState {
     @Expose

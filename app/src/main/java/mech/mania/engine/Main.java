@@ -4,17 +4,9 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import mech.mania.engine.config.Config;
-import mech.mania.engine.core.GameLogic;
-import mech.mania.engine.core.PlayerEndState;
-import mech.mania.engine.logging.JsonLogger;
-import mech.mania.engine.model.GameLog;
-import mech.mania.engine.model.GameState;
-import mech.mania.engine.model.PlayerDecisionParseException;
-import mech.mania.engine.model.decisions.MoveAction;
-import mech.mania.engine.model.decisions.PlayerDecision;
-import mech.mania.engine.networking.PlayerCommunicationInfo;
-import org.apache.commons.cli.*;
+import mech.mania.engine.model.Position;
+import mech.mania.engine.model.decisions.ActionDecision;
+import mech.mania.engine.model.decisions.MoveDecision;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -29,11 +21,11 @@ import java.util.List;
 public class Main {
 
     private static MoveDecision getMoveDecision(Game game) {
-
+        return new MoveDecision(new Position(1, 1));
     }
 
     private static ActionDecision getActionDecision(Game game) {
-
+        return new ActionDecision();
     }
 
     /**
@@ -41,8 +33,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Game game = new Game();
-        game.sendItem(ItemType.NONE);
-        game.sendUpgrade(ItemType.NONE);
+        game.sendItem("NONE");
+        game.sendUpgrade("NONE");
 
         while (true) {
             game.updateGame();
