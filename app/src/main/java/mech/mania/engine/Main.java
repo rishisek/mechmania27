@@ -33,11 +33,14 @@ public class Main {
      */
     public static void main(String[] args) {
         Game game = new Game();
-        game.sendItem("NONE");
-        game.sendUpgrade("NONE");
 
         while (true) {
-            game.updateGame();
+            try {
+                game.updateGame();
+            } catch (IOException e) {
+                System.exit(-1);
+            }
+
             game.sendMoveDecision(getMoveDecision(game));
             game.sendActionDecision(getActionDecision(game));
         }

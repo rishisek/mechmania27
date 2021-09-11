@@ -7,6 +7,8 @@ import mech.mania.engine.model.decisions.MoveDecision;
 import mech.mania.engine.networking.EngineCommunicator;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+
 public class Game {
 
     public final Config config;
@@ -16,28 +18,27 @@ public class Game {
 
     public Game() {
         // TODO player: set your name and select your item and upgrade
-        sendPlayerName("ABCD");
+        sendPlayerName("P1");
         sendItem("NONE");
         sendUpgrade("NONE");
 
-        String constantsJson = EngineCommunicator.readLine();
         gson = new Gson();
+        String constantsJson = "";
+        try {
+            constantsJson = EngineCommunicator.readLine();
+
+        } catch (IOException e) {
+            System.exit(-1);
+        }
+
         config = gson.fromJson(constantsJson, Config.class);
+        EngineCommunicator.gameConfig = config;
 //        constants = new Constants("mm27");
     }
 
-    public void updateGame() {
-        while (true) { // TODO fix this?
-            String gameStateJson = EngineCommunicator.readLine();
-            gameState = gson.fromJson(gameStateJson, GameState.class);
-
-            makeDecision();
-        }
-
-    }
-
-    public void makeDecision() {
-        // TODO: PLAYER DO SOMETHING HERE
+    public void updateGame() throws IOException {
+        String gameStateJson = EngineCommunicator.readLine();
+        gameState = gson.fromJson(gameStateJson, GameState.class);
     }
 
     public void sendPlayerName(String name) {
@@ -53,10 +54,12 @@ public class Game {
     }
 
     public void sendMoveDecision(MoveDecision decision) {
+        // TODO player implement this
         EngineCommunicator.sendString(decision.toString());
     }
 
     public void sendActionDecision(ActionDecision decision) {
+        // TODO player implement this
         EngineCommunicator.sendString(decision.toString());
     }
 }

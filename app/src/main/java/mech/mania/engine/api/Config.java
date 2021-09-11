@@ -36,6 +36,9 @@ public final class Config {
     public final int BACKPACK_CARRYING_CAPACITY;
     public final int SPYGLASS_PROTECTION_RADIUS;
 
+    // ========== OTHER CONSTANTS ===============
+    public final int PLAYER_TIMEOUT;
+
     public final Map<String, CropInformation> almanac;
 
     // CONSTRUCTORS
@@ -66,6 +69,8 @@ public final class Config {
         HARVEST_RADIUS =         Integer.parseInt(rb.getString("player.harvestradius"));
         PROTECTION_RADIUS =      Integer.parseInt(rb.getString("player.protectionradius"));
         STARTING_MONEY =         Integer.parseInt(rb.getString("player.startingmoney"));
+
+        PLAYER_TIMEOUT =         Integer.parseInt(rb.getString("networking.timeout"));
 
         GREEN_GROCER_LOYALTY_CARD_DISCOUNT  = Double.parseDouble(rb.getString("upgrades.green_grocer_loyalty_card_discount"));
         RABBITS_FOOT_DOUBLE_DROP_CHANCE     = Double.parseDouble(rb.getString("upgrades.rabbits_foot_double_drop_chance"));

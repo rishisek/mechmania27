@@ -1,9 +1,8 @@
 package mech.mania.engine;
 
+import mech.mania.engine.api.Config;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static mech.mania.engine.Main.gameLoop;
 
 /**
  * Unit tests for your bot!
@@ -11,7 +10,7 @@ import static mech.mania.engine.Main.gameLoop;
 public class MainTest {
 
     // set your own game constants inside app/src/test/resources/debug.properties!
-    private static final Constants debugConstants = new Constants("debug");
+    private static final Config debugConstants = new Config("debug");
 
     @Test
     public void test1() {
