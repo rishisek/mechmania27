@@ -21,7 +21,7 @@ public class Tile {
     private boolean rainTotemEffect = false;
     private boolean fertilityIdolEffect = false;
     private boolean pesticideEffect = false;
-    private boolean scarecrowEffect = false;
+    private int scarecrowEffect = -1;
 
     public String getType() {
         return type;
@@ -39,10 +39,6 @@ public class Tile {
         return pesticideEffect;
     }
 
-    public boolean isScarecrowEffect() {
-        return scarecrowEffect;
-    }
-
     public Crop getCrop() {
         return crop;
     }
@@ -57,9 +53,10 @@ public class Tile {
 
     public double getFertility() {
         if (isFertilityIdolEffect()){
-            return 2 * type.getFertility();
+
+            return 2 * TileType.valueOf(type).getFertility();
         }
-        return type.getFertility();
+        return TileType.valueOf(type).getFertility();
     }
 
     @Override

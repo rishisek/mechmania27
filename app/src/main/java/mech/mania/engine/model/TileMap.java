@@ -1,19 +1,22 @@
 package mech.mania.engine.model;
 
 import com.google.gson.annotations.Expose;
-import mech.mania.engine.config.Config;
-import mech.mania.engine.util.GameUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TileMap implements Iterable<Tile> {
     @Expose
-    private final int mapHeight;
+    private int mapHeight;
     @Expose
-    private final int mapWidth;
+    private int mapWidth;
     @Expose
-    private final ArrayList<ArrayList<Tile>> tiles;
+    private ArrayList<ArrayList<Tile>> tiles;
+
+    @Expose
+    private ArrayList<Position> greenGrocerTiles;
+
+    private static final TileType[] UNPLANTABLE_TILETYPES = {TileType.GREEN_GROCER, TileType.GRASS};
 
     public int getMapHeight() {
         return mapHeight;
@@ -63,6 +66,15 @@ public class TileMap implements Iterable<Tile> {
             return tiles.get(row).get(col);
         }
     }
+
+    public ArrayList<ArrayList<Tile>> getTiles() {
+        return tiles;
+    }
+
+    public ArrayList<Position> getGreenGrocerTiles() {
+        return greenGrocerTiles;
+    }
+
 
 }
 

@@ -1,26 +1,47 @@
 package mech.mania.engine;
 
-import mech.mania.engine.api.Constants;
+import mech.mania.engine.api.Config;
 import mech.mania.engine.model.GameState;
 import mech.mania.engine.model.decisions.ActionDecision;
 import mech.mania.engine.model.decisions.MoveDecision;
 import mech.mania.engine.networking.EngineCommunicator;
+import com.google.gson.Gson;
 
 public class Game {
 
-    public final Constants constants;
+    public final Config config;
+    public final Gson gson;
+    public GameState gameState;
     // private Gson gson = new GsonBuilder().create();
 
     public Game() {
+        // TODO player: set your name and select your item and upgrade
+        sendPlayerName("ABCD");
+        sendItem("NONE");
+        sendUpgrade("NONE");
+
         String constantsJson = EngineCommunicator.readLine();
-        // constants = gson.fromJson(constantsJson, Constants.class);
+        gson = new Gson();
+        config = gson.fromJson(constantsJson, Config.class);
+//        constants = new Constants("mm27");
     }
 
     public void updateGame() {
-        String gameStateJson = EngineCommunicator.readLine();
-        // GameState gameState = gson.fromJson(gameStateJson, GameState.class);
+        while (true) { // TODO fix this?
+            String gameStateJson = EngineCommunicator.readLine();
+            gameState = gson.fromJson(gameStateJson, GameState.class);
 
-        // TODO: update game object using game state
+            makeDecision();
+        }
+
+    }
+
+    public void makeDecision() {
+        // TODO: PLAYER DO SOMETHING HERE
+    }
+
+    public void sendPlayerName(String name) {
+        EngineCommunicator.sendString(name);
     }
 
     public void sendItem(String item) {
