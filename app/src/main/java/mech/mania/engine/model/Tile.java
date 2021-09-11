@@ -15,12 +15,16 @@ public class Tile {
     @SerializedName("p2_item")
     private String p2Item;
 
+    @Expose
     private int turnsLeftToGrow;
+    @Expose
     private Player planter;
 
+    @Expose
     private boolean rainTotemEffect = false;
+    @Expose
     private boolean fertilityIdolEffect = false;
-    private boolean pesticideEffect = false;
+    @Expose
     private int scarecrowEffect = -1;
 
     public String getType() {
@@ -33,10 +37,6 @@ public class Tile {
 
     public boolean isFertilityIdolEffect() {
         return fertilityIdolEffect;
-    }
-
-    public boolean isPesticideEffect() {
-        return pesticideEffect;
     }
 
     public Crop getCrop() {

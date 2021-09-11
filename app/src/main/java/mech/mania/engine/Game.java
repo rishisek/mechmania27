@@ -17,8 +17,7 @@ public class Game {
     // private Gson gson = new GsonBuilder().create();
 
     public Game() {
-        // TODO player: set your name and select your item and upgrade
-        sendPlayerName("P1");
+        // TODO player: select your item and upgrade
         sendItem("NONE");
         sendUpgrade("NONE");
 
@@ -39,10 +38,6 @@ public class Game {
     public void updateGame() throws IOException {
         String gameStateJson = EngineCommunicator.readLine();
         gameState = gson.fromJson(gameStateJson, GameState.class);
-    }
-
-    public void sendPlayerName(String name) {
-        EngineCommunicator.sendString(name);
     }
 
     public void sendItem(String item) {
