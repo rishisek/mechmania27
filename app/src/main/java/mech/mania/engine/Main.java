@@ -5,6 +5,8 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import mech.mania.engine.model.Position;
+import mech.mania.engine.model.ItemType;
+import mech.mania.engine.model.UpgradeType;
 import mech.mania.engine.model.decisions.ActionDecision;
 import mech.mania.engine.model.decisions.MoveDecision;
 
@@ -32,7 +34,7 @@ public class Main {
      * @param args Program arguments
      */
     public static void main(String[] args) {
-        Game game = new Game();
+        Game game = new Game(ItemType.NONE, UpgradeType.NONE);
 
         while (true) {
             try {

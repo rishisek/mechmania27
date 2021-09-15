@@ -9,4 +9,9 @@ public class MoveDecision {
     public MoveDecision(Position position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return String.format("move %s", position);
+    }
 }

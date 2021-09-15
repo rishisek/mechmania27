@@ -4,6 +4,8 @@ import mech.mania.engine.api.Config;
 import mech.mania.engine.model.GameState;
 import mech.mania.engine.model.decisions.ActionDecision;
 import mech.mania.engine.model.decisions.MoveDecision;
+import mech.mania.engine.model.ItemType;
+import mech.mania.engine.model.UpgradeType;
 import mech.mania.engine.networking.EngineCommunicator;
 import com.google.gson.Gson;
 
@@ -16,10 +18,9 @@ public class Game {
     public GameState gameState;
     // private Gson gson = new GsonBuilder().create();
 
-    public Game() {
-        // TODO player: select your item and upgrade
-        sendItem("NONE");
-        sendUpgrade("NONE");
+    public Game(ItemType item, UpgradeType upgrade) {
+        sendItem(item.toString());
+        sendUpgrade(upgrade.toString());
 
         gson = new Gson();
         String constantsJson = "";
@@ -49,12 +50,10 @@ public class Game {
     }
 
     public void sendMoveDecision(MoveDecision decision) {
-        // TODO player implement this
         EngineCommunicator.sendString(decision.toString());
     }
 
     public void sendActionDecision(ActionDecision decision) {
-        // TODO player implement this
         EngineCommunicator.sendString(decision.toString());
     }
 }
