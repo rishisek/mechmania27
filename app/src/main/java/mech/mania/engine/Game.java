@@ -19,25 +19,21 @@ public class Game {
     // private Gson gson = new GsonBuilder().create();
 
     public Game(ItemType item, UpgradeType upgrade) {
+        EngineCommunicator.sendString("heartbeat");
+
         sendItem(item.toString());
         sendUpgrade(upgrade.toString());
 
-        gson = new Gson();
-        String constantsJson = "";
-        try {
-            constantsJson = EngineCommunicator.readLine();
-
-        } catch (IOException e) {
-            System.exit(-1);
-        }
-
-        config = gson.fromJson(constantsJson, Config.class);
+        config = new Config("mm27");
         EngineCommunicator.gameConfig = config;
-//        constants = new Constants("mm27");
+
+        gson = new Gson();
     }
 
     public void updateGame() throws IOException {
+        System.err.println("Waiting for gamestate");
         String gameStateJson = EngineCommunicator.readLine();
+        System.err.println("received gamestate");
         gameState = gson.fromJson(gameStateJson, GameState.class);
     }
 

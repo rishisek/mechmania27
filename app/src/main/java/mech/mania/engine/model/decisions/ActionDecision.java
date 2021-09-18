@@ -1,9 +1,7 @@
 package mech.mania.engine.model.decisions;
 
-public class ActionDecision {
+public abstract class ActionDecision {
 
     @Override
-    public String toString() {
-        return "not implemented";
-    }
+    public abstract String toString();
 }

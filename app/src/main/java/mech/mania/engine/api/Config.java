@@ -70,7 +70,7 @@ public final class Config {
         PROTECTION_RADIUS =      Integer.parseInt(rb.getString("player.protectionradius"));
         STARTING_MONEY =         Integer.parseInt(rb.getString("player.startingmoney"));
 
-        PLAYER_TIMEOUT =         Integer.parseInt(rb.getString("networking.timeout"));
+        PLAYER_TIMEOUT =         Integer.parseInt(rb.getString("networking.timeout.player"));
 
         GREEN_GROCER_LOYALTY_CARD_DISCOUNT  = Double.parseDouble(rb.getString("upgrades.green_grocer_loyalty_card_discount"));
         RABBITS_FOOT_DOUBLE_DROP_CHANCE     = Double.parseDouble(rb.getString("upgrades.rabbits_foot_double_drop_chance"));
@@ -82,8 +82,8 @@ public final class Config {
         // TODO: set up almanac
          almanac = new HashMap<>();
 
-        String[] cropTypes = {"NONE", "POTATO", "CORN", "GRAPES", "JOGANFRUIT", "PEANUTS", "QUADROTRITICALE",
-                "DUCHAMFRUIT", "GOLDENCORN"};
+        String[] cropTypes = {"none", "potato", "corn", "grapes", "joganfruit", "peanuts", "quadrotriticale",
+                "duchamfruit", "goldencorn"};
         for (String s : cropTypes) {
             almanac.put(s, new CropInformation(rb, s));
         }

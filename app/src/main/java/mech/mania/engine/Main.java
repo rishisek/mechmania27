@@ -7,13 +7,13 @@ import com.google.gson.GsonBuilder;
 import mech.mania.engine.model.Position;
 import mech.mania.engine.model.ItemType;
 import mech.mania.engine.model.UpgradeType;
-import mech.mania.engine.model.decisions.ActionDecision;
-import mech.mania.engine.model.decisions.MoveDecision;
+import mech.mania.engine.model.decisions.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class Main {
     }
 
     private static ActionDecision getActionDecision(Game game) {
-        return new ActionDecision();
+        return new NullDecision();
     }
 
     /**
