@@ -35,8 +35,13 @@ public class Main {
      */
     private static MoveDecision getMoveDecision(Game game) {
         GameState gameState = game.getGameState();
+        logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
+                gameState.getTurn(),
+                String.join(", ", gameState.getFeedback())));
+
         Position currentPosition = gameState.getMyPlayer().getPosition();
-        logger.debug("Moving to " + currentPosition);
+        logger.debug(String.format("[Turn %d] Sending MoveDecision: [%s]",
+                gameState.getTurn(), currentPosition));
         return new MoveDecision(currentPosition);
     }
 
@@ -54,8 +59,13 @@ public class Main {
      */
     private static ActionDecision getActionDecision(Game game) {
         GameState gameState = game.getGameState();
-        ActionDecision toSend = new NullDecision();
-        logger.debug("ActionDecision: " + toSend);
+        logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
+                gameState.getTurn(),
+                String.join(", ", gameState.getFeedback())));
+
+        ActionDecision toSend = new UseItemDecision();
+        logger.debug(String.format("[Turn %d] Sending ActionDecision: [%s]",
+                gameState.getTurn(), toSend));
         return toSend;
     }
 
@@ -68,12 +78,20 @@ public class Main {
         Game game = new Game(ItemType.NONE, UpgradeType.NONE);
 
         while (true) {
+            // Turn part 1: Move Decision
             try {
                 game.updateGame();
             } catch (IOException e) {
                 System.exit(-1);
             }
             game.sendMoveDecision(getMoveDecision(game));
+
+            // Turn part 2: Action Decision
+            try {
+                game.updateGame();
+            } catch (IOException e) {
+                System.exit(-1);
+            }
             game.sendActionDecision(getActionDecision(game));
         }
     }

@@ -2,6 +2,8 @@ package mech.mania.competitor.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class GameState {
     private int turn;
     @SerializedName("p1")
@@ -10,6 +12,8 @@ public class GameState {
     private Player player2;
     private TileMap tileMap;
     private int playerNum;
+
+    private List<String> feedback;
 
     public int getTurn() {
         return turn;
@@ -39,5 +43,9 @@ public class GameState {
             return player2;
         }
         return player1;
+    }
+
+    public List<String> getFeedback() {
+        return feedback;
     }
 }
