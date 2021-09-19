@@ -108,4 +108,8 @@ public final class Constants {
             ALMANAC.put(s, new CropInformation(rb, s));
         }
     }
+
+    public Constants() {
+        this("mm27");
+    }
 }

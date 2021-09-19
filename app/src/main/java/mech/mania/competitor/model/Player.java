@@ -3,6 +3,7 @@ package mech.mania.competitor.model;
 import java.util.*;
 
 public class Player {
+    private int id;
     private String name;
     private Position position;
     private String item;
@@ -107,5 +108,13 @@ public class Player {
 
     public boolean hasItemTimeExpired() {
         return itemTimeExpired;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

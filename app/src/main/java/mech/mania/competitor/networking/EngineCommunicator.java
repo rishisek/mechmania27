@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public final class EngineCommunicator {
-    /**
-     *
-     */
-    public static Constants gameConstants;
+
+    private static Constants gameConstants;
+
+    public static void setGameConstants(Constants gameConstants) {
+        EngineCommunicator.gameConstants = gameConstants;
+    }
 
     public static String readLine() throws IOException {
         SafeBufferedReader reader = new SafeBufferedReader(new InputStreamReader(System.in), gameConstants.PLAYER_TIMEOUT);

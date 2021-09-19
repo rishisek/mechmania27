@@ -1,8 +1,11 @@
 package mech.mania.competitor.model;
 
 import com.google.gson.annotations.SerializedName;
+import mech.mania.competitor.api.Constants;
 
 public class Tile {
+    private static Constants constants = new Constants();
+
     private String type;
     private Crop crop;
     @SerializedName("p1_item")
@@ -21,12 +24,16 @@ public class Tile {
         return type;
     }
 
-    public boolean isRainTotemEffect() {
+    public boolean hasRainTotemEffect() {
         return rainTotemEffect;
     }
 
-    public boolean isFertilityIdolEffect() {
+    public boolean hasFertilityIdolEffect() {
         return fertilityIdolEffect;
+    }
+
+    public boolean hasScarecrowEffect() {
+        return scarecrowEffect == 1 - planter.getId();
     }
 
     public Crop getCrop() {
@@ -42,9 +49,8 @@ public class Tile {
     }
 
     public double getFertility() {
-        if (isFertilityIdolEffect()){
-
-            return 2 * TileType.valueOf(type).getFertility();
+        if (hasFertilityIdolEffect()){
+            return constants.FERTILITY_IDOL_FERTILITY_MULTIPLIER * TileType.valueOf(type).getFertility();
         }
         return TileType.valueOf(type).getFertility();
     }
