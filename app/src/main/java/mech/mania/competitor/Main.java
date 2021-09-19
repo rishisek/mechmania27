@@ -63,7 +63,7 @@ public class Main {
                 gameState.getTurn(),
                 String.join(", ", gameState.getFeedback())));
 
-        ActionDecision toSend = new UseItemDecision();
+        ActionDecision toSend = new NullDecision();
         logger.debug(String.format("[Turn %d] Sending ActionDecision: [%s]",
                 gameState.getTurn(), toSend));
         return toSend;
