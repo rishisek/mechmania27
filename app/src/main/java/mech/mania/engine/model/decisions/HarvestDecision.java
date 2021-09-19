@@ -15,7 +15,7 @@ public class HarvestDecision extends ActionDecision {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Position coord : coords) {
-            builder.append(String.format("%s ", coord.toString()));
+            builder.append(String.format("%s ", coord.getEngineReadableString()));
         }
 
         return String.format("%s", builder);

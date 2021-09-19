@@ -30,7 +30,7 @@ public class TileMap implements Iterable<Tile> {
         return pos.getX() >= 0 && pos.getX() < mapWidth && pos.getY() >= 0 && pos.getY() < mapHeight;
     }
 
-    public String getTileType(Position pos) {
+    public TileType getTileType(Position pos) {
         return get(pos).getType();
     }
 

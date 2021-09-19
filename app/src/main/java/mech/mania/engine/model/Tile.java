@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tile {
     @Expose
-    private String type;
+    private TileType type;
     @Expose
     private Crop crop;
     @Expose
@@ -27,7 +27,7 @@ public class Tile {
     @Expose
     private int scarecrowEffect = -1;
 
-    public String getType() {
+    public TileType getType() {
         return type;
     }
 
@@ -54,9 +54,9 @@ public class Tile {
     public double getFertility() {
         if (isFertilityIdolEffect()){
 
-            return 2 * TileType.valueOf(type).getFertility();
+            return 2 * type.getFertility();
         }
-        return TileType.valueOf(type).getFertility();
+        return type.getFertility();
     }
 
     @Override

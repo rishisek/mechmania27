@@ -21,7 +21,7 @@ public class PlantDecision extends ActionDecision {
         for (int i = 0; i < cropTypes.size(); i++) {
             builder.append(cropTypes.get(i));
             builder.append(" ");
-            builder.append(coords.get(i).toString());
+            builder.append(coords.get(i).getEngineReadableString());
         }
 
         return builder.toString();

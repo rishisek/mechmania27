@@ -1,7 +1,6 @@
 package mech.mania.engine;
 
-import mech.mania.engine.api.Config;
-import org.junit.Assert;
+import mech.mania.engine.api.Constants;
 import org.junit.Test;
 
 /**
@@ -10,7 +9,7 @@ import org.junit.Test;
 public class MainTest {
 
     // set your own game constants inside app/src/test/resources/debug.properties!
-    private static final Config debugConstants = new Config("debug");
+    private static final Constants debugConstants = new Constants("debug");
 
     @Test
     public void test1() {

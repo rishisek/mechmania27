@@ -44,6 +44,12 @@ public class Main {
             }
 
             game.sendMoveDecision(getMoveDecision(game));
+            try {
+                game.updateGame();
+            } catch (IOException e) {
+                System.exit(-1);
+            }
+
             game.sendActionDecision(getActionDecision(game));
         }
     }

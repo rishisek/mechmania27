@@ -1,6 +1,6 @@
 package mech.mania.engine;
 
-import mech.mania.engine.api.Config;
+import mech.mania.engine.api.Constants;
 import mech.mania.engine.model.GameState;
 import mech.mania.engine.model.decisions.ActionDecision;
 import mech.mania.engine.model.decisions.MoveDecision;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Game {
 
-    public final Config config;
+    public final Constants constants;
     public final Gson gson;
     public GameState gameState;
     // private Gson gson = new GsonBuilder().create();
@@ -24,8 +24,8 @@ public class Game {
         sendItem(item.toString());
         sendUpgrade(upgrade.toString());
 
-        config = new Config("mm27");
-        EngineCommunicator.gameConfig = config;
+        constants = new Constants("mm27");
+        EngineCommunicator.gameConstants = constants;
 
         gson = new Gson();
     }

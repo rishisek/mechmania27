@@ -12,6 +12,6 @@ public class MoveDecision {
 
     @Override
     public String toString() {
-        return String.format("move %s", position);
+        return String.format("move %s", position.getEngineReadableString());
     }
 }

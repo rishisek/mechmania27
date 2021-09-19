@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public final class Config {
+public final class Constants {
     // =========== BOARD CONSTANTS ===============
     public final int BOARD_HEIGHT;
     public final int BOARD_WIDTH;
@@ -46,7 +46,7 @@ public final class Config {
      * Constructor used for debug when you want to set your own constants.
      * @param resourceName prefix of .properties file in the resources folder
      */
-    public Config(String resourceName) throws MissingResourceException {
+    public Constants(String resourceName) throws MissingResourceException {
         ResourceBundle rb = ResourceBundle.getBundle(resourceName);
 
         // board props

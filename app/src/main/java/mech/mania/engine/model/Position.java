@@ -43,6 +43,10 @@ public class Position {
 
     @Override
     public String toString() {
+        return String.format("(%d,%d)", x, y);
+    }
+
+    public String getEngineReadableString() {
         return String.format("%d %d", x, y);
     }
 }
