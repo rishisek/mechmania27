@@ -1,4 +1,4 @@
-package mech.mania.engine.networking;
+package mech.mania.competitor.networking;
 
 import java.io.BufferedReader;
 import java.io.IOException;

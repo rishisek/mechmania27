@@ -1,49 +1,29 @@
-package mech.mania.engine.model;
-
-import com.google.gson.annotations.Expose;
+package mech.mania.competitor.model;
 
 import java.util.*;
 
 public class Player {
-    @Expose
+    private int id;
     private String name;
-    @Expose
     private Position position;
-    @Expose
     private String item;
-    @Expose
     private String upgrade;
-    @Expose
     private double money;
-    @Expose
     private Map<String, Integer> seedInventory = new HashMap<>();
-    @Expose
     private ArrayList<Crop> harvestedInventory = new ArrayList<>();
 
-    @Expose
     private double discount;
-    @Expose
     private int amountSpent;
-    @Expose
     private int protectionRadius;
-    @Expose
     private int harvestRadius;
-    @Expose
     private int plantRadius;
-    @Expose
     private int carryingCapacity;
-    @Expose
     private int maxMovement;
-    @Expose
     private double doubleDropChance;
 
-    @Expose
     private boolean usedItem = false;
-    @Expose
     private boolean hasDeliveryDrone = false;
-    @Expose
     private boolean useCoffeeThermos = false;
-    @Expose
     private boolean itemTimeExpired = false;
 
     public double getMoney() {
@@ -118,15 +98,23 @@ public class Player {
         return usedItem;
     }
 
-    public boolean isHasDeliveryDrone() {
+    public boolean hasDeliveryDrone() {
         return hasDeliveryDrone;
     }
 
-    public boolean isUseCoffeeThermos() {
+    public boolean usedCoffeeThermos() {
         return useCoffeeThermos;
     }
 
-    public boolean isItemTimeExpired() {
+    public boolean hasItemTimeExpired() {
         return itemTimeExpired;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

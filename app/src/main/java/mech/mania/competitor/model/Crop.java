@@ -1,4 +1,4 @@
-package mech.mania.engine.model;
+package mech.mania.competitor.model;
 
 import com.google.gson.annotations.Expose;
 

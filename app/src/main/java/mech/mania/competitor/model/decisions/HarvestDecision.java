@@ -1,6 +1,6 @@
-package mech.mania.engine.model.decisions;
+package mech.mania.competitor.model.decisions;
 
-import mech.mania.engine.model.Position;
+import mech.mania.competitor.model.Position;
 
 import java.util.ArrayList;
 

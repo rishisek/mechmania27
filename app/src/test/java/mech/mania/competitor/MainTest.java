@@ -1,6 +1,6 @@
-package mech.mania.engine;
+package mech.mania.competitor;
 
-import mech.mania.engine.api.Constants;
+import mech.mania.competitor.api.Constants;
 import org.junit.Test;
 
 /**

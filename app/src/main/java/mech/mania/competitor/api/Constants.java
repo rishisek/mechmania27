@@ -1,4 +1,4 @@
-package mech.mania.engine.api;
+package mech.mania.competitor.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +27,19 @@ public final class Constants {
     public final int CARRYING_CAPACITY;
     public final int PROTECTION_RADIUS;
 
+    // =========== ITEM CONSTANTS ============
+    public final int RAIN_TOTEM_GROWTH_MULTIPLIER;
+    public final int RAIN_TOTEM_EFFECT_RADIUS;
+    public final int FERTILITY_IDOL_FERTILITY_MULTIPLIER;
+    public final int FERTILITY_IDOL_EFFECT_RADIUS;
+    public final double PESTICIDE_CROP_VALUE_DECREASE;
+    public final int PESTICIDE_EFFECT_RADIUS;
+    public final int SCARECROW_EFFECT_RADIUS;
+    public final int COFFEE_THERMOS_MOVEMENT_MULTIPLIER;
+
     // =========== UPGRADE CONSTANTS ============
     public final double GREEN_GROCER_LOYALTY_CARD_DISCOUNT;
+    public final double GREEN_GROCER_LOYALTY_CARD_MINIMUM;
     public final double RABBITS_FOOT_DOUBLE_DROP_CHANCE;
     public final int LONGER_LEGS_MAX_MOVEMENT;
     public final int SEED_A_PULT_PLANT_RADIUS;
@@ -39,7 +50,7 @@ public final class Constants {
     // ========== OTHER CONSTANTS ===============
     public final int PLAYER_TIMEOUT;
 
-    public final Map<String, CropInformation> almanac;
+    public final Map<String, CropInformation> ALMANAC;
 
     // CONSTRUCTORS
     /**
@@ -72,20 +83,35 @@ public final class Constants {
 
         PLAYER_TIMEOUT =         Integer.parseInt(rb.getString("networking.timeout.player"));
 
-        GREEN_GROCER_LOYALTY_CARD_DISCOUNT  = Double.parseDouble(rb.getString("upgrades.green_grocer_loyalty_card_discount"));
-        RABBITS_FOOT_DOUBLE_DROP_CHANCE     = Double.parseDouble(rb.getString("upgrades.rabbits_foot_double_drop_chance"));
-        LONGER_LEGS_MAX_MOVEMENT            = Integer.parseInt(rb.getString("upgrades.longer_legs_max_movement"));
-        SEED_A_PULT_PLANT_RADIUS            = Integer.parseInt(rb.getString("upgrades.seed_a_pult_plant_radius"));
-        LONGER_SCYTHE_HARVEST_RADIUS        = Integer.parseInt(rb.getString("upgrades.longer_scythe_harvest_radius"));
-        BACKPACK_CARRYING_CAPACITY          = Integer.parseInt(rb.getString("upgrades.backpack_carrying_capacity"));
-        SPYGLASS_PROTECTION_RADIUS          = Integer.parseInt(rb.getString("upgrades.spyglass_protection_radius"));
-        // TODO: set up almanac
-         almanac = new HashMap<>();
+        // item constants
+        RAIN_TOTEM_GROWTH_MULTIPLIER        = Integer.parseInt(rb.getString("items.rain_totem.growth_multiplier"));
+        RAIN_TOTEM_EFFECT_RADIUS            = Integer.parseInt(rb.getString("items.rain_totem.effect_radius"));
+        FERTILITY_IDOL_FERTILITY_MULTIPLIER = Integer.parseInt(rb.getString("items.fertility_idol.fertility_multiplier"));
+        FERTILITY_IDOL_EFFECT_RADIUS        = Integer.parseInt(rb.getString("items.fertility_idol.effect_radius"));
+        PESTICIDE_CROP_VALUE_DECREASE       = Double.parseDouble(rb.getString("items.pesticide.crop_value_decrease"));
+        PESTICIDE_EFFECT_RADIUS             = Integer.parseInt(rb.getString("items.pesticide.effect_radius"));
+        SCARECROW_EFFECT_RADIUS             = Integer.parseInt(rb.getString("items.scarecrow.effect_radius"));
+        COFFEE_THERMOS_MOVEMENT_MULTIPLIER  = Integer.parseInt(rb.getString("items.coffee_thermos.movement_multiplier"));
 
-        String[] cropTypes = {"none", "potato", "corn", "grapes", "joganfruit", "peanuts", "quadrotriticale",
-                "duchamfruit", "goldencorn"};
+        // upgrade constants
+        GREEN_GROCER_LOYALTY_CARD_DISCOUNT  = Double.parseDouble(rb.getString("upgrades.green_grocer_loyalty_card.discount"));
+        GREEN_GROCER_LOYALTY_CARD_MINIMUM   = Double.parseDouble(rb.getString("upgrades.green_grocer_loyalty_card.minimum"));
+        RABBITS_FOOT_DOUBLE_DROP_CHANCE     = Double.parseDouble(rb.getString("upgrades.rabbits_foot.double_drop_chance"));
+        LONGER_LEGS_MAX_MOVEMENT            = Integer.parseInt(rb.getString("upgrades.longer_legs.max_movement"));
+        SEED_A_PULT_PLANT_RADIUS            = Integer.parseInt(rb.getString("upgrades.seed_a_pult.plant_radius"));
+        LONGER_SCYTHE_HARVEST_RADIUS        = Integer.parseInt(rb.getString("upgrades.longer_scythe.harvest_radius"));
+        BACKPACK_CARRYING_CAPACITY          = Integer.parseInt(rb.getString("upgrades.backpack.carrying_capacity"));
+        SPYGLASS_PROTECTION_RADIUS          = Integer.parseInt(rb.getString("upgrades.spyglass.protection_radius"));
+
+        ALMANAC = new HashMap<>();
+        String[] cropTypes = {"none", "potato", "corn", "grape", "jogan_fruit", "peanut", "quadrotriticale",
+                "ducham_fruit", "golden_corn"};
         for (String s : cropTypes) {
-            almanac.put(s, new CropInformation(rb, s));
+            ALMANAC.put(s, new CropInformation(rb, s));
         }
+    }
+
+    public Constants() {
+        this("mm27");
     }
 }

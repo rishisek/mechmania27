@@ -1,4 +1,4 @@
-package mech.mania.engine.networking;
+package mech.mania.competitor.networking;
 
 public class Logger {
     // TODO: refactor into static functions?
@@ -6,10 +6,10 @@ public class Logger {
     public Logger() { }
 
     public void info(String log) {
-        System.err.println("info: " + log);
+        EngineCommunicator.sendErr("info: " + log);
     }
 
     public void debug(String log) {
-        System.err.println("debug: " + log);
+        EngineCommunicator.sendErr("debug: " + log);
     }
 }

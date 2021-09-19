@@ -1,4 +1,4 @@
-package mech.mania.engine.api;
+package mech.mania.competitor.api;
 
 import java.util.ResourceBundle;
 
@@ -11,7 +11,7 @@ public class CropInformation {
 
     public CropInformation(ResourceBundle rb, String cropType) {
         this.fertilitysens = Double.parseDouble(rb.getString(String.format("croptype.%s.fertilitysens", cropType)));
-        this.valueGrowth = Double.parseDouble(rb.getString(String.format("croptype.%s.valuegrowth", cropType)));
+        this.valueGrowth = Double.parseDouble(rb.getString(String.format("croptype.%s.growthvalue", cropType)));
         this.growthTime = Double.parseDouble(rb.getString(String.format("croptype.%s.growthtime", cropType)));
         this.seedPrice = Double.parseDouble(rb.getString(String.format("croptype.%s.seedprice", cropType)));
         this.description = rb.getString(String.format("croptype.%s.description", cropType));

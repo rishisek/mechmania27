@@ -1,21 +1,19 @@
-package mech.mania.engine.model;
+package mech.mania.competitor.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class GameState {
-    @Expose
     private int turn;
-    @Expose
     @SerializedName("p1")
     private Player player1;
-    @Expose
     @SerializedName("p2")
     private Player player2;
-    @Expose
     private TileMap tileMap;
-    @Expose
     private int playerNum;
+
+    private List<String> feedback;
 
     public int getTurn() {
         return turn;
@@ -33,17 +31,21 @@ public class GameState {
         return player2;
     }
 
-    public Player getPlayer(int playerID) {
-        if (playerID == 0) {
+    public Player getMyPlayer() {
+        if (playerNum == 1) {
             return player1;
         }
         return player2;
     }
 
-    public Player getOpponentPlayer(int playerID) {
-        if (playerID == 0) {
+    public Player getOpponentPlayer() {
+        if (playerNum == 1) {
             return player2;
         }
         return player1;
+    }
+
+    public List<String> getFeedback() {
+        return feedback;
     }
 }

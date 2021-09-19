@@ -1,42 +1,39 @@
-package mech.mania.engine.model;
+package mech.mania.competitor.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import mech.mania.competitor.api.Constants;
 
 public class Tile {
-    @Expose
     private TileType type;
-    @Expose
+    private static Constants constants = new Constants();
+
     private Crop crop;
-    @Expose
     @SerializedName("p1_item")
     private String p1Item;
-    @Expose
     @SerializedName("p2_item")
     private String p2Item;
 
-    @Expose
     private int turnsLeftToGrow;
-    @Expose
     private Player planter;
 
-    @Expose
     private boolean rainTotemEffect = false;
-    @Expose
     private boolean fertilityIdolEffect = false;
-    @Expose
     private int scarecrowEffect = -1;
 
     public TileType getType() {
         return type;
     }
 
-    public boolean isRainTotemEffect() {
+    public boolean hasRainTotemEffect() {
         return rainTotemEffect;
     }
 
-    public boolean isFertilityIdolEffect() {
+    public boolean hasFertilityIdolEffect() {
         return fertilityIdolEffect;
+    }
+
+    public boolean hasScarecrowEffect() {
+        return scarecrowEffect == 1 - planter.getId();
     }
 
     public Crop getCrop() {
@@ -52,9 +49,9 @@ public class Tile {
     }
 
     public double getFertility() {
-        if (isFertilityIdolEffect()){
 
-            return 2 * type.getFertility();
+        if (hasFertilityIdolEffect()){
+            return constants.FERTILITY_IDOL_FERTILITY_MULTIPLIER * type.getFertility();
         }
         return type.getFertility();
     }

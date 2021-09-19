@@ -1,12 +1,8 @@
-package mech.mania.engine.model;
-
-import com.google.gson.annotations.Expose;
+package mech.mania.competitor.model;
 
 public class Position {
 
-    @Expose
     private int x;
-    @Expose
     private int y;
 
     public Position(final int x, final int y) {

@@ -1,4 +1,4 @@
-package mech.mania.engine.model.decisions;
+package mech.mania.competitor.model.decisions;
 
 public abstract class ActionDecision {
 

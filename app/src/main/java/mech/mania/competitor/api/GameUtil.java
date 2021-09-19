@@ -1,6 +1,9 @@
-package mech.mania.engine.api;
+package mech.mania.competitor.api;
 
-import mech.mania.engine.model.*;
+import mech.mania.competitor.model.GameState;
+import mech.mania.competitor.model.Player;
+import mech.mania.competitor.model.Position;
+import mech.mania.competitor.model.TileType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,34 +40,28 @@ public class GameUtil {
         // init position indicates the first row that will *become* part of a band after the first shift
         // e.g. 0 => fertility band starts off the map while 1 => fertility band starts with 1 row on the map
         int offset = shifts - row - 1 + constants.F_BAND_INIT_POSITION;
-        if (offset < 0){
+        if (offset < 0) {
             // Below fertility band
             newType = TileType.SOIL;
-        }
-        else if (offset < constants.F_BAND_OUTER_HEIGHT){
+        } else if (offset < constants.F_BAND_OUTER_HEIGHT) {
             // Within first outer band
             newType = TileType.F_BAND_OUTER;
-        }
-        else if (offset < constants.F_BAND_OUTER_HEIGHT + constants.F_BAND_MID_HEIGHT){
+        } else if (offset < constants.F_BAND_OUTER_HEIGHT + constants.F_BAND_MID_HEIGHT) {
             // Within first mid band
             newType = TileType.F_BAND_MID;
-        }
-        else if (offset < constants.F_BAND_OUTER_HEIGHT + constants.F_BAND_MID_HEIGHT +
-                constants.F_BAND_INNER_HEIGHT){
+        } else if (offset < constants.F_BAND_OUTER_HEIGHT + constants.F_BAND_MID_HEIGHT +
+                constants.F_BAND_INNER_HEIGHT) {
             // Within inner band
             newType = TileType.F_BAND_INNER;
-        }
-        else if (offset < constants.F_BAND_OUTER_HEIGHT + 2 * constants.F_BAND_MID_HEIGHT +
-                constants.F_BAND_INNER_HEIGHT){
+        } else if (offset < constants.F_BAND_OUTER_HEIGHT + 2 * constants.F_BAND_MID_HEIGHT +
+                constants.F_BAND_INNER_HEIGHT) {
             // Within second mid band
             newType = TileType.F_BAND_MID;
-        }
-        else if (offset < 2 * constants.F_BAND_OUTER_HEIGHT + 2 * constants.F_BAND_MID_HEIGHT +
-                constants.F_BAND_INNER_HEIGHT){
+        } else if (offset < 2 * constants.F_BAND_OUTER_HEIGHT + 2 * constants.F_BAND_MID_HEIGHT +
+                constants.F_BAND_INNER_HEIGHT) {
             // Within second outer band
             newType = TileType.F_BAND_OUTER;
-        }
-        else {
+        } else {
             // Above fertility bands
             newType = TileType.ARID;
         }
