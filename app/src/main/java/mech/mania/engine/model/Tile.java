@@ -4,27 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Tile {
-    @Expose
     private String type;
-    @Expose
     private Crop crop;
-    @Expose
     @SerializedName("p1_item")
     private String p1Item;
-    @Expose
     @SerializedName("p2_item")
     private String p2Item;
 
-    @Expose
     private int turnsLeftToGrow;
-    @Expose
     private Player planter;
 
-    @Expose
     private boolean rainTotemEffect = false;
-    @Expose
     private boolean fertilityIdolEffect = false;
-    @Expose
     private int scarecrowEffect = -1;
 
     public String getType() {

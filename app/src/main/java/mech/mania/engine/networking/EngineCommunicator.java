@@ -13,14 +13,14 @@ public final class EngineCommunicator {
 
     public static String readLine() throws IOException {
         SafeBufferedReader reader = new SafeBufferedReader(new InputStreamReader(System.in), gameConfig.PLAYER_TIMEOUT);
-        String line = reader.readLine();
-        return line;
+        return reader.readLine();
     }
 
-    /**
-     *
-     */
-    public static void sendString(String string) {
+    public static void sendOut(String string) {
         System.out.println(string);
+    }
+
+    public static void sendErr(String string) {
+        System.err.println(string);
     }
 }

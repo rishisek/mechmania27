@@ -19,7 +19,7 @@ public class Game {
     // private Gson gson = new GsonBuilder().create();
 
     public Game(ItemType item, UpgradeType upgrade) {
-        EngineCommunicator.sendString("heartbeat");
+        EngineCommunicator.sendOut("heartbeat");
 
         sendItem(item.toString());
         sendUpgrade(upgrade.toString());
@@ -38,18 +38,18 @@ public class Game {
     }
 
     public void sendItem(String item) {
-        EngineCommunicator.sendString(item);
+        EngineCommunicator.sendOut(item);
     }
 
     public void sendUpgrade(String upgrade) {
-        EngineCommunicator.sendString(upgrade);
+        EngineCommunicator.sendOut(upgrade);
     }
 
     public void sendMoveDecision(MoveDecision decision) {
-        EngineCommunicator.sendString(decision.toString());
+        EngineCommunicator.sendOut(decision.toString());
     }
 
     public void sendActionDecision(ActionDecision decision) {
-        EngineCommunicator.sendString(decision.toString());
+        EngineCommunicator.sendOut(decision.toString());
     }
 }

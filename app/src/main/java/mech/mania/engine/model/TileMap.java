@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TileMap implements Iterable<Tile> {
-    @Expose
     private int mapHeight;
-    @Expose
     private int mapWidth;
-    @Expose
     private ArrayList<ArrayList<Tile>> tiles;
 
-    @Expose
     private ArrayList<Position> greenGrocerTiles;
 
     private static final TileType[] UNPLANTABLE_TILETYPES = {TileType.GREEN_GROCER, TileType.GRASS};

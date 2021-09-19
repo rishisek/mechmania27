@@ -6,10 +6,10 @@ public class Logger {
     public Logger() { }
 
     public void info(String log) {
-        System.err.println("info: " + log);
+        EngineCommunicator.sendErr("info: " + log);
     }
 
     public void debug(String log) {
-        System.err.println("debug: " + log);
+        EngineCommunicator.sendErr("debug: " + log);
     }
 }
