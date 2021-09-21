@@ -46,8 +46,12 @@ jar {
                 'Main-Class': 'mech.mania.competitor.Main'
         )
     }
-
     baseName 'mm27-java-sp'
+}
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
 // https://stackoverflow.com/questions/4871656/using-gradle-to-build-a-jar-with-dependencies
