@@ -1,5 +1,7 @@
 package mech.mania.competitor.api;
 
+import mech.mania.competitor.model.CropType;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -49,8 +51,6 @@ public final class Constants {
 
     // ========== OTHER CONSTANTS ===============
     public final int PLAYER_TIMEOUT;
-
-    public final Map<String, CropInformation> ALMANAC;
 
     // CONSTRUCTORS
     /**
@@ -102,13 +102,6 @@ public final class Constants {
         LONGER_SCYTHE_HARVEST_RADIUS        = Integer.parseInt(rb.getString("upgrades.longer_scythe.harvest_radius"));
         BACKPACK_CARRYING_CAPACITY          = Integer.parseInt(rb.getString("upgrades.backpack.carrying_capacity"));
         SPYGLASS_PROTECTION_RADIUS          = Integer.parseInt(rb.getString("upgrades.spyglass.protection_radius"));
-
-        ALMANAC = new HashMap<>();
-        String[] cropTypes = {"none", "potato", "corn", "grape", "jogan_fruit", "peanut", "quadrotriticale",
-                "ducham_fruit", "golden_corn"};
-        for (String s : cropTypes) {
-            ALMANAC.put(s, new CropInformation(rb, s));
-        }
     }
 
     public Constants() {

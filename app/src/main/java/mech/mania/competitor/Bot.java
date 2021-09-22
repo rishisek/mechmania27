@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Class that runs the game.
  */
-public class Main {
+public class Bot {
 
     private static final Constants constants = new Constants();
     private static final Logger logger = new Logger();

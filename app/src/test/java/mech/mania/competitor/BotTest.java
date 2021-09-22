@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Unit tests for your bot!
  */
-public class MainTest {
+public class BotTest {
 
     // set your own game constants inside app/src/test/resources/debug.properties!
     private static final Constants debugConstants = new Constants("debug");

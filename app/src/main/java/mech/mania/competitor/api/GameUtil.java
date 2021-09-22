@@ -29,7 +29,7 @@ public class GameUtil {
         return res;
     }
 
-    public static TileType tileType0OnTurn(int turn, Constants constants, Position coord) {
+    public static TileType tileTypeOnTurn(int turn, Constants constants, Position coord) {
         int shifts = (turn - 1 - constants.F_BAND_INIT_DELAY) / constants.F_BAND_MOVE_DELAY;
         shifts = Math.max(0, shifts);
 

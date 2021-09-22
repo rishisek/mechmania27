@@ -9,7 +9,7 @@ public class Player {
     private String item;
     private String upgrade;
     private double money;
-    private Map<String, Integer> seedInventory = new HashMap<>();
+    private Map<CropType, Integer> seedInventory = new HashMap<>();
     private ArrayList<Crop> harvestedInventory = new ArrayList<>();
 
     private double discount;
@@ -50,11 +50,11 @@ public class Player {
         return harvestedInventory;
     }
 
-    public Map<String, Integer> getSeeds() {
+    public Map<CropType, Integer> getSeeds() {
         return this.seedInventory;
     }
 
-    public Map<String, Integer> getSeedInventory() {
+    public Map<CropType, Integer> getSeedInventory() {
         return seedInventory;
     }
 
