@@ -9,11 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameUtil {
+
+    private static final Constants constants = new Constants();
+
+    public static boolean validPosition(Position pos) {
+        return pos.getX() >= 0 && pos.getX() < constants.BOARD_WIDTH && pos.getY() >= 0 && pos.getY() < constants.BOARD_HEIGHT;
+    }
+
+    public static int distance(Position pos1, Position pos2) {
+        return Math.abs(pos1.getX() - pos2.getX()) + Math.abs(pos1.getY() - pos2.getY());
+    }
+
     public static Player getPlayerFromName(GameState state, String playerName) {
         return state.getPlayer1().getName().equals(playerName) ? state.getPlayer1() : state.getPlayer2();
     }
 
-    public static List<Position> withinRange(GameState state, String playerName) {
+    public static List<Position> withinMoveRange(GameState state, String playerName) {
         Player myPlayer = getPlayerFromName(state, playerName);
         int speed = myPlayer.getMaxMovement();
 
@@ -22,10 +33,29 @@ public class GameUtil {
         for (int i = myPlayer.getPosition().getY() - speed; i < myPlayer.getPosition().getY() + speed; i++) {
             int leftoverTravel = Math.abs(speed - (myPlayer.getPosition().getY() - i));
             for (int j = myPlayer.getPosition().getX() - leftoverTravel; j < myPlayer.getPosition().getX() + leftoverTravel; j++) {
-                res.add(new Position(j, i));
+                Position pos = new Position(j, i);
+                if (validPosition(pos)) {
+                    res.add(pos);
+                }
             }
         }
+        return res;
+    }
 
+    public static List<Position> withinHarvestRange(GameState state, String playerName) {
+        Player myPlayer = getPlayerFromName(state, playerName);
+        int radius = myPlayer.getHarvestRadius();
+
+        List<Position> res = new ArrayList<>();
+
+        for (int i = myPlayer.getPosition().getY() - radius; i < myPlayer.getPosition().getY() + radius; i++) {
+            for (int j = myPlayer.getPosition().getX() - radius; j < myPlayer.getPosition().getX() + radius; j++) {
+                Position pos = new Position(j, i);
+                if (distance(pos, myPlayer.getPosition()) <= radius && validPosition(pos)) {
+                    res.add(pos);
+                }
+            }
+        }
         return res;
     }
 
