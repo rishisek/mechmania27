@@ -14,18 +14,6 @@ public class BuyDecision extends ActionDecision {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("buy ");
-        for (int i = 0; i < cropTypes.size(); i++) {
-            builder.append(cropTypes.get(i));
-            builder.append(" ");
-            builder.append(quantities.get(i));
-        }
-
-        return builder.toString();
-    }
-
-    public String getEngineReadableString() {
-        StringBuilder builder = new StringBuilder();
         builder.append("BuyDecision(");
         for (int i = 0; i < cropTypes.size(); i++) {
             builder.append(cropTypes.get(i));
@@ -36,6 +24,18 @@ public class BuyDecision extends ActionDecision {
             }
         }
         builder.append(")");
+
+        return builder.toString();
+    }
+
+    public String getEngineReadableString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("buy ");
+        for (int i = 0; i < cropTypes.size(); i++) {
+            builder.append(cropTypes.get(i));
+            builder.append(" ");
+            builder.append(quantities.get(i));
+        }
 
         return builder.toString();
     }
