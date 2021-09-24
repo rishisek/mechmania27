@@ -31,7 +31,7 @@ public class GameUtil {
         List<Position> res = new ArrayList<>();
 
         for (int i = myPlayer.getPosition().getY() - speed; i < myPlayer.getPosition().getY() + speed; i++) {
-            int leftoverTravel = Math.abs(speed - (myPlayer.getPosition().getY() - i));
+            int leftoverTravel = Math.max(0, speed - Math.abs(myPlayer.getPosition().getY() - i));
             for (int j = myPlayer.getPosition().getX() - leftoverTravel; j < myPlayer.getPosition().getX() + leftoverTravel; j++) {
                 Position pos = new Position(j, i);
                 if (validPosition(pos)) {
