@@ -43,7 +43,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'mech.mania.competitor.Main'
+                'Main-Class': 'mech.mania.competitor.Bot'
         )
     }
     baseName 'mm27-java-sp'

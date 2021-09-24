@@ -135,7 +135,7 @@ public class Bot {
      * @param args Program arguments (ignored)
      */
     public static void main(String[] args) {
-        Game game = new Game(ItemType.NONE, UpgradeType.NONE);
+        Game game = new Game(ItemType.COFFEE_THERMOS, UpgradeType.LONGER_SCYTHE);
 
         while (true) {
             // Turn part 1: Move Decision

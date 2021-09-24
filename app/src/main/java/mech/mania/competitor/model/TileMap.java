@@ -30,7 +30,7 @@ public class TileMap implements Iterable<Tile> {
 
     public Tile get(Position pos) {
         if (isValidPosition(pos)) {
-            return tiles.get(pos.getX()).get(pos.getY());
+            return tiles.get(pos.getY()).get(pos.getX());
         }
         return null;
     }
