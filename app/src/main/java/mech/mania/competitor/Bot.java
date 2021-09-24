@@ -56,7 +56,7 @@ public class Bot {
             decision = new MoveDecision(pos);
         }
 
-        logger.debug(String.format("[Turn %d] Sending MoveDecision: [%s]",
+        logger.debug(String.format("[Turn %d] Sending MoveDecision: %s",
                 gameState.getTurn(), decision));
         return decision;
     }
@@ -124,7 +124,7 @@ public class Bot {
             decision = new DoNothingDecision();
         }
         
-        logger.debug(String.format("[Turn %d] Sending ActionDecision: [%s]",
+        logger.debug(String.format("[Turn %d] Sending ActionDecision: %s",
                 gameState.getTurn(), decision));
         return decision;
     }

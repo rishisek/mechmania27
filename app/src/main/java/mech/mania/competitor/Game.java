@@ -49,10 +49,10 @@ public class Game {
     }
 
     public void sendMoveDecision(MoveDecision decision) {
-        EngineCommunicator.sendOut(decision.toString());
+        EngineCommunicator.sendOut(decision.getEngineReadableString());
     }
 
     public void sendActionDecision(ActionDecision decision) {
-        EngineCommunicator.sendOut(decision.toString());
+        EngineCommunicator.sendOut(decision.getEngineReadableString());
     }
 }

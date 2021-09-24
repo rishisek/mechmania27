@@ -17,6 +17,22 @@ public class PlantDecision extends ActionDecision {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("PlantDecision(");
+        for (int i = 0; i < cropTypes.size(); i++) {
+            builder.append(cropTypes.get(i));
+            builder.append(":");
+            builder.append(coords.get(i));
+            if (i < cropTypes.size() - 1) {
+                builder.append(",");
+            }
+        }
+        builder.append(")");
+
+        return builder.toString();
+    }
+
+    public String getEngineReadableString() {
+        StringBuilder builder = new StringBuilder();
         builder.append("plant ");
         for (int i = 0; i < cropTypes.size(); i++) {
             builder.append(cropTypes.get(i));
