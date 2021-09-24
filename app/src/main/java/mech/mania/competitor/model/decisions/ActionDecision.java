@@ -5,5 +5,4 @@ public abstract class ActionDecision {
     @Override
     public abstract String toString();
 
-    public abstract String getEngineReadableString();
 }
