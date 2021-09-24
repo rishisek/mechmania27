@@ -2,13 +2,13 @@ package mech.mania.competitor.model.decisions;
 
 import mech.mania.competitor.model.Position;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PlantDecision extends ActionDecision {
-    protected ArrayList<String> cropTypes;
-    protected ArrayList<Position> coords;
+    protected List<String> cropTypes;
+    protected List<Position> coords;
 
-    public PlantDecision(ArrayList<String> cropTypes, ArrayList<Position> coords) {
+    public PlantDecision(List<String> cropTypes, List<Position> coords) {
         this.cropTypes = cropTypes;
         this.coords = coords;
         assert(cropTypes.size() == coords.size());

@@ -1,11 +1,11 @@
 package mech.mania.competitor.model.decisions;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BuyDecision extends ActionDecision {
-    protected ArrayList<String> cropTypes;
-    protected ArrayList<Integer> quantities;
-    public BuyDecision(ArrayList<String> cropTypes, ArrayList<Integer> quantities) {
+    protected List<String> cropTypes;
+    protected List<Integer> quantities;
+    public BuyDecision(List<String> cropTypes, List<Integer> quantities) {
         this.cropTypes = cropTypes;
         this.quantities = quantities;
         assert(cropTypes.size() == quantities.size());
