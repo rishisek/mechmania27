@@ -2,7 +2,7 @@
 **/.DS_Store
 
 ## IDEA IDE Config
-.idea
+.idea/*
 
 # Ignore Gradle project-specific cache directory
 .gradle/*
