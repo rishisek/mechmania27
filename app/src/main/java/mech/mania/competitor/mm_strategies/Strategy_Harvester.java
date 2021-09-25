@@ -7,6 +7,7 @@ import mech.mania.competitor.model.CropType;
 import mech.mania.competitor.model.GameState;
 import mech.mania.competitor.model.Position;
 import mech.mania.competitor.model.Tile;
+import mech.mania.competitor.model.decisions.DoNothingDecision;
 import mech.mania.competitor.model.decisions.HarvestDecision;
 
 import java.util.ArrayList;
@@ -93,10 +94,13 @@ public class Strategy_Harvester extends Strategy {
         }
 
         Optional<HarvestTarget> maybeBestTarget = harvestTargets.stream()
+                .filter((HarvestTarget harvestTarget) -> harvestTarget.crops_.size() > 0)
                 .max(Comparator.comparing(HarvestTarget::getNetWorth)
                         .thenComparing(HarvestTarget::getNetCropValue));
 
-        if (!maybeBestTarget.isPresent()) return new ArrayList<>();
+        if (!maybeBestTarget.isPresent()) {
+            return manager.utilities.moveToPosition(manager.utilities.getNearestGrocer(), new DoNothingDecision());
+        }
 
         HarvestTarget bestTarget = maybeBestTarget.get();
 
