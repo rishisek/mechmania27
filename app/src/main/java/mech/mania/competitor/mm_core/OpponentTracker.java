@@ -25,8 +25,6 @@ public class OpponentTracker {
 
     // Forever
     public boolean hasOpponentSpentEver = false;
-    public ItemType item;
-    public UpgradeType upgrade;
 
     // This round
     public boolean isStalking = false;
@@ -48,9 +46,6 @@ public class OpponentTracker {
 
         GameState gameState = game.getGameState();
         Player opponent = gameState.getOpponentPlayer();
-
-        item = Utilities.getItem(opponent.getItem());
-        upgrade = Utilities.getUpgrade(opponent.getUpgrade());
 
         calculateDistance(opponent);
         calculateAmountSpent(opponent);

@@ -24,14 +24,6 @@ public class Utilities {
         opponent_ = gameState_.getOpponentPlayer();
     }
 
-    public static ItemType getItem(String item) {
-        return ItemType.valueOf(item);
-    }
-
-    public static UpgradeType getUpgrade(String upgrade) {
-        return UpgradeType.valueOf(upgrade);
-    }
-
     public Position getNearestGrocer() {
         return gameState_.getTileMap().getGreenGrocerTiles().stream()
                 .min(Comparator.comparingInt(this::getRelativeDistance)).get();
