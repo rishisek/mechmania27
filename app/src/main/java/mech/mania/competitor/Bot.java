@@ -2,6 +2,7 @@ package mech.mania.competitor;
 
 import mech.mania.competitor.api.Constants;
 import mech.mania.competitor.mm_core.Manager;
+import mech.mania.competitor.mm_models.DecisionPair;
 import mech.mania.competitor.mm_models.TurnState;
 import mech.mania.competitor.mm_models.StartGameConfig;
 import mech.mania.competitor.model.*;
@@ -37,37 +38,17 @@ public class Bot {
      * @return MoveDecision A location for the bot to move to this turn
      */
     private static MoveDecision getMoveDecision(Game game) {
-        MoveDecision decision = manager.nextMoveDecision();
+        DecisionPair decision = manager.nextDecision();
 
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
                 gameState.getTurn(),
                 String.join(", ", gameState.getFeedback())));
 
-        /*
-        // Select your decision here!
-        Player myPlayer = gameState.getMyPlayer();
-        MoveDecision decision;
-        Position pos = myPlayer.getPosition();
-
-        if (Math.random() < 0.5 && (myPlayer.getSeedInventory().isEmpty() || !myPlayer.getHarvestedInventory().isEmpty())) {
-            // If we have something to sell that we harvested, then try to move towards the green grocer tiles
-            logger.debug("Moving towards green grocer");
-            decision = new MoveDecision(new Position(constants.BOARD_WIDTH / 2, Math.max(0, pos.getY() - constants.MAX_MOVEMENT)));
-        } else {
-            // If not, then move randomly within the range of locations we can move to
-            List<Position> possiblePositions = GameUtil.withinMoveRange(gameState, myPlayer.getName());
-
-            pos = possiblePositions.get(rand.nextInt(possiblePositions.size()));
-            logger.debug("Moving randomly");
-            decision = new MoveDecision(pos);
-        }
-         */
-
         logger.debug(String.format("[Turn %d] Sending MoveDecision: %s",
-                gameState.getTurn(), decision));
+                gameState.getTurn(), decision.moveDecision));
 
-        return decision;
+        return decision.moveDecision;
     }
 
     /**
@@ -83,63 +64,16 @@ public class Bot {
      * @return ActionDecision A decision for the bot to make this turn
      */
     private static ActionDecision getActionDecision(Game game) {
-        ActionDecision decision = manager.nextActionDecision();
+        DecisionPair decision = manager.nextDecision();
 
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
                 gameState.getTurn(),
                 String.join(", ", gameState.getFeedback())));
-
-        /*
-        // Select your decision here!
-        Player myPlayer = gameState.getMyPlayer();
-        Position pos = myPlayer.getPosition();
-        ActionDecision decision;
-
-        // Let the crop of focus be the one we have a seed for, if not just choose a random crop
-        CropType crop;
-        if (!myPlayer.getSeedInventory().isEmpty()) {
-            crop = Collections.max(myPlayer.getSeedInventory().entrySet(), (entry1, entry2) -> entry1.getValue() - entry2.getValue()).getKey();
-        } else {
-            crop = CropType.values()[rand.nextInt(CropType.values().length)];
-        }
-
-        // Get a list of possible harvest locations for our harvest radius
-        ArrayList<Position> possibleHarvestLocations = new ArrayList<>();
-        int harvestRadius = myPlayer.getHarvestRadius();
-
-        for (Position harvestPos : GameUtil.withinHarvestRange(gameState, myPlayer.getName())) {
-            if (gameState.getTileMap().get(harvestPos).getCrop().getValue() > 0) {
-                possibleHarvestLocations.add(harvestPos);
-            }
-        }
-
-        logger.debug(String.format("Possible harvest locations=%s", possibleHarvestLocations));
-
-        if (possibleHarvestLocations.size() > 0) {
-            // If we can harvest something, try to harvest it
-            decision = new HarvestDecision(possibleHarvestLocations);
-        } else if (myPlayer.getSeedInventory().get(crop) > 0
-                && gameState.getTileMap().get(pos).getType() != TileType.GREEN_GROCER
-                && gameState.getTileMap().get(pos).getType().ordinal() >= TileType.F_BAND_OUTER.ordinal()) {
-            // If not but we have that seed, then try to plant it in a fertility band
-            logger.debug(String.format("Deciding to try to plant at position %s", pos));
-            decision = new PlantDecision(Collections.singletonList(crop.name()), Collections.singletonList(pos));
-        } else if (myPlayer.getMoney() >= crop.getSeedBuyPrice()
-                && gameState.getTileMap().get(pos).getType() == TileType.GREEN_GROCER) {
-            // If we don't have that seed, but we have the money to buy it, then move towards the green grocer to buy it
-            logger.debug(String.format("Buy 1 of %s", crop));
-            decision = new BuyDecision(Collections.singletonList(crop.name()), Collections.singletonList(1));
-        } else {
-            // If we can't do any of that, then just do nothing (move around some more)
-            logger.debug("Couldn't find anything to do, waiting for move step");
-            decision = new HarvestDecision(new ArrayList(Arrays.asList(new Position(0, 0))));
-        }
-         */
         
         logger.debug(String.format("[Turn %d] Sending ActionDecision: %s",
-                gameState.getTurn(), decision));
-        return decision;
+                gameState.getTurn(), decision.actionDecision));
+        return decision.actionDecision;
     }
 
     /**
