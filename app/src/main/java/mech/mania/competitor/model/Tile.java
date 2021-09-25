@@ -33,7 +33,7 @@ public class Tile {
     }
 
     public boolean hasScarecrowEffect() {
-        return scarecrowEffect >= 0 && scarecrowEffect != planter.getId();
+        return scarecrowEffect >= 0 && scarecrowEffect + 1 != planter.getId();
     }
 
     public Crop getCrop() {
