@@ -58,6 +58,7 @@ public class Bot {
 
         logger.debug(String.format("[Turn %d] Sending MoveDecision: %s",
                 gameState.getTurn(), decision));
+
         return decision;
     }
 
@@ -121,7 +122,7 @@ public class Bot {
         } else {
             // If we can't do any of that, then just do nothing (move around some more)
             logger.debug("Couldn't find anything to do, waiting for move step");
-            decision = new DoNothingDecision();
+            decision = new HarvestDecision(new ArrayList(Arrays.asList(new Position(0, 0))));
         }
         
         logger.debug(String.format("[Turn %d] Sending ActionDecision: %s",
