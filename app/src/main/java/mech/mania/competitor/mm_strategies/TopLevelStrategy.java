@@ -13,35 +13,49 @@ import java.util.ArrayList;
 public class TopLevelStrategy extends Strategy {
   private static final Logger logger = new Logger();
 
+  enum Phase { SCARECROW_PLANT, PEANUT_PLANT, TWO_PLOT, HARVEST}
+
+  private Strategy getStrategy(Phase phase){
+     switch(phase) {
+       case SCARECROW_PLANT: return new Strat_Scarecrow();
+       case PEANUT_PLANT: return new Strategy_Two();
+       default: return new Strategy_Harvester();
+    }
+  }
+
+  private ArrayList<DecisionPair> getDecisionsForStrategy(Phase phase, Manager manager){
+    return getStrategy(phase).getDecisions(manager);
+  }
+
   @Override
   public ArrayList<DecisionPair> getDecisions(Manager manager) {
     ArrayList<DecisionPair> decisions = new ArrayList<>();
+//
+//    if (manager.game_.getGameState().getOpponentPlayer().getItem()
+//        == ItemType.SCARECROW.toString()) {
+//      if (manager.game_.getGameState().getOpponentPlayer().getUpgrade()
+//          == UpgradeType.LONGER_LEGS.toString()) {
+//        if (!manager.opponentTracker.hasOpponentSpentEver) {
+//          decisions.add(
+//              new DecisionPair(
+//                  new MoveDecision(manager.game_.getGameState().getMyPlayer().getPosition()),
+//                  new DoNothingDecision()));
+//          return decisions;
+//        } else {
+//          // Do scarecrow
+//          decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
+//        }
+//      } else {
+//        // Do two plot.
+//      }
+//    } else {
+//      decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
+//
+//      // Do peanut grief.
+//      decisions.addAll(getDecisionsForStrategy(Phase.PEANUT_PLANT,manager));
+//    }
 
-    if (manager.game_.getGameState().getOpponentPlayer().getItem()
-        == ItemType.SCARECROW.toString()) {
-      if (manager.game_.getGameState().getOpponentPlayer().getUpgrade()
-          == UpgradeType.LONGER_LEGS.toString()) {
-        if (!manager.opponentTracker.hasOpponentSpentEver) {
-          decisions.add(
-              new DecisionPair(
-                  new MoveDecision(manager.game_.getGameState().getMyPlayer().getPosition()),
-                  new DoNothingDecision()));
-          return decisions;
-        } else {
-          // Do scarecrow
-          Strategy strategy = new Strat_Scarecrow();
-          decisions.addAll(strategy.getDecisions(manager));
-          return decisions;
-        }
-      } else {
-        // Do two plot.
-      }
-    } else {
-      // Do peanut grief.
-      Strategy strategy = new Strategy_Two();
-      decisions.addAll(strategy.getDecisions(manager));
-      return decisions;
-    }
+    decisions.addAll(getDecisionsForStrategy(Phase.HARVEST, manager));
 
     return decisions;
   }
