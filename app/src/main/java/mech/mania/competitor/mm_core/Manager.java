@@ -22,12 +22,10 @@ public class Manager {
     // TODO: write code to switch strategies.
     // TODO: implement the strategy abstract class, and the individual strategies
 
-    private Game game_;
-    private TurnState turnState_;
+    public Game game_;
+    public TurnState turnState_;
 
-    public Manager() {
-
-    }
+    public Manager() {}
 
     public static StartGameConfig startGame() {
         return new StartGameConfig(ItemType.SCARECROW, UpgradeType.LONGER_LEGS);
