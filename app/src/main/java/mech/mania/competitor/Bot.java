@@ -2,6 +2,10 @@ package mech.mania.competitor;
 
 import mech.mania.competitor.api.Constants;
 import mech.mania.competitor.api.GameUtil;
+import mech.mania.competitor.mm_core.Manager;
+import mech.mania.competitor.mm_models.TurnState;
+import mech.mania.competitor.mm_models.StartGameConfig;
+import mech.mania.competitor.mm_utils.Utilities;
 import mech.mania.competitor.model.*;
 import mech.mania.competitor.model.decisions.*;
 
@@ -19,6 +23,8 @@ public class Bot {
     private static final Logger logger = new Logger();
     private static final Random rand = new Random();
 
+    private static final Manager manager = new Manager();
+
     /**
      * Returns a move decision for the turn given the current game state.
      * This is part 1 of 2 of the turn.
@@ -33,6 +39,9 @@ public class Bot {
      * @return MoveDecision A location for the bot to move to this turn
      */
     private static MoveDecision getMoveDecision(Game game) {
+        Utilities utilities = new Utilities(game);
+        // TODO: @RISHI USE THE UTILITIES HERE, MAKE A NEW ONE FOR EVERY DECISION.
+
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
                 gameState.getTurn(),
@@ -136,23 +145,28 @@ public class Bot {
      * @param args Program arguments (ignored)
      */
     public static void main(String[] args) {
-        Game game = new Game(ItemType.COFFEE_THERMOS, UpgradeType.LONGER_SCYTHE);
+        StartGameConfig startGameConfig = Manager.startGame();
+        Game game = new Game(startGameConfig.item_, startGameConfig.upgrade_);
 
         while (true) {
             // Turn part 1: Move Decision
             try {
                 game.updateGame();
+                manager.setGame(game);
             } catch (IOException e) {
                 System.exit(-1);
             }
+            manager.setTurnState(TurnState.Move);
             game.sendMoveDecision(getMoveDecision(game));
 
             // Turn part 2: Action Decision
             try {
                 game.updateGame();
+                manager.setGame(game);
             } catch (IOException e) {
                 System.exit(-1);
             }
+            manager.setTurnState(TurnState.Action);
             game.sendActionDecision(getActionDecision(game));
         }
     }
