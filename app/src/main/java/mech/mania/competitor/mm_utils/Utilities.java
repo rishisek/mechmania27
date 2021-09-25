@@ -96,6 +96,14 @@ public class Utilities {
         return Math.abs(delta.getX()) + Math.abs(delta.getY());
     }
 
+    public int turnToReach(Player player, Position delta) {
+        return (int) Math.ceil((double) getDistance(delta) / player.getMaxMovement());
+    }
+
+    public int turnToReach(Position delta) {
+        return turnToReach(myPlayer_, delta);
+    }
+
     public ArrayList<DecisionPair> moveToPosition(Position currentPosition, Position futurePosition,
                                                   ActionDecision actionDecision) {
         ArrayList<DecisionPair> pair = new ArrayList<>();
@@ -124,5 +132,9 @@ public class Utilities {
         }
 
         return pair;
+    }
+
+    public ArrayList<DecisionPair> moveToPosition(Position futurePosition, ActionDecision actionDecision) {
+        return moveToPosition(myPlayer_.getPosition(), futurePosition, actionDecision);
     }
 }
