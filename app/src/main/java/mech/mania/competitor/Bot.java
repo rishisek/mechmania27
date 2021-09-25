@@ -5,7 +5,6 @@ import mech.mania.competitor.api.GameUtil;
 import mech.mania.competitor.mm_core.Manager;
 import mech.mania.competitor.mm_models.TurnState;
 import mech.mania.competitor.mm_models.StartGameConfig;
-import mech.mania.competitor.mm_utils.Utilities;
 import mech.mania.competitor.model.*;
 import mech.mania.competitor.model.decisions.*;
 
@@ -39,14 +38,14 @@ public class Bot {
      * @return MoveDecision A location for the bot to move to this turn
      */
     private static MoveDecision getMoveDecision(Game game) {
-        Utilities utilities = new Utilities(game);
-        // TODO: @RISHI USE THE UTILITIES HERE, MAKE A NEW ONE FOR EVERY DECISION.
+        MoveDecision decision = manager.getMoveDecision();
 
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
                 gameState.getTurn(),
                 String.join(", ", gameState.getFeedback())));
 
+        /*
         // Select your decision here!
         Player myPlayer = gameState.getMyPlayer();
         MoveDecision decision;
@@ -64,6 +63,7 @@ public class Bot {
             logger.debug("Moving randomly");
             decision = new MoveDecision(pos);
         }
+         */
 
         logger.debug(String.format("[Turn %d] Sending MoveDecision: %s",
                 gameState.getTurn(), decision));
@@ -84,11 +84,14 @@ public class Bot {
      * @return ActionDecision A decision for the bot to make this turn
      */
     private static ActionDecision getActionDecision(Game game) {
+        ActionDecision decision = manager.getActionDecision();
+
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
                 gameState.getTurn(),
                 String.join(", ", gameState.getFeedback())));
 
+        /*
         // Select your decision here!
         Player myPlayer = gameState.getMyPlayer();
         Position pos = myPlayer.getPosition();
@@ -133,6 +136,7 @@ public class Bot {
             logger.debug("Couldn't find anything to do, waiting for move step");
             decision = new HarvestDecision(new ArrayList(Arrays.asList(new Position(0, 0))));
         }
+         */
         
         logger.debug(String.format("[Turn %d] Sending ActionDecision: %s",
                 gameState.getTurn(), decision));
