@@ -9,5 +9,5 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 abstract public class Strategy {
-  public abstract ArrayList<DecisionPair> getDecisions();
+  public abstract ArrayList<DecisionPair> getDecisions(Manager manager);
 }
