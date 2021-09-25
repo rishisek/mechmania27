@@ -7,6 +7,7 @@ import mech.mania.competitor.model.GameState;
 import mech.mania.competitor.model.ItemType;
 import mech.mania.competitor.model.Player;
 import mech.mania.competitor.model.UpgradeType;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -37,14 +38,10 @@ public class OpponentTracker {
     public double averageDistance;
 
     // Just for calculations
-    public ArrayList<Integer> pastDistances;
+    public ArrayList<Integer> pastDistances = new ArrayList<>();
     public int pastDistanceTurns = 0;
 
     public int previousAmountSpent = 0;
-
-    public OpponentTracker() {
-        pastDistances =  new ArrayList<>();
-    }
 
     public void update(Game game, Utilities utilities) {
         utilities_ = utilities;
