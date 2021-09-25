@@ -8,6 +8,7 @@ import mech.mania.competitor.model.decisions.DoNothingDecision;
 import mech.mania.competitor.model.decisions.MoveDecision;
 import mech.mania.competitor.networking.Logger;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TopLevelStrategy extends Strategy {
@@ -34,7 +35,7 @@ public class TopLevelStrategy extends Strategy {
     ArrayList<DecisionPair> decisions = new ArrayList<>();
 
     if (!onlyHarvest) {
-      if (manager.game_.getGameState().getOpponentPlayer().getItem()
+      /*if (manager.game_.getGameState().getOpponentPlayer().getItem()
           == ItemType.SCARECROW.toString()) {
         if (manager.game_.getGameState().getOpponentPlayer().getUpgrade()
             == UpgradeType.LONGER_LEGS.toString()) {
@@ -59,10 +60,24 @@ public class TopLevelStrategy extends Strategy {
         decisions.addAll(getDecisionsForStrategy(Phase.PEANUT_PLANT, manager));
 
         onlyHarvest = true;
+      }*/
+
+      if (!manager.opponentTracker.hasOpponentSpentEver) {
+        decisions.add(
+                new DecisionPair(
+                        new MoveDecision(manager.game_.getGameState().getMyPlayer().getPosition()),
+                        new DoNothingDecision()));
+        return decisions;
+      } else {
+        decisions.addAll(getDecisionsForStrategy(Phase.PEANUT_PLANT, manager));
+        onlyHarvest = true;
       }
     }
 
-    decisions.addAll(getDecisionsForStrategy(Phase.HARVEST, manager));
+    ArrayList<DecisionPair> harvest = getDecisionsForStrategy(Phase.HARVEST, manager);
+
+    if (harvest.size() > 0) decisions.addAll(harvest);
+    else decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
 
     return decisions;
   }

@@ -99,7 +99,11 @@ public class Strategy_Harvester extends Strategy {
                         .thenComparing(HarvestTarget::getNetCropValue));
 
         if (!maybeBestTarget.isPresent()) {
-            return manager.utilities.moveToPosition(manager.utilities.getNearestGrocer(), new DoNothingDecision());
+            if (manager.game_.getGameState().getMyPlayer().getHarvestedInventory().size() > 0) {
+                return manager.utilities.moveToPosition(manager.utilities.getNearestGrocer(), new DoNothingDecision());
+            }
+
+            return new ArrayList<>();
         }
 
         HarvestTarget bestTarget = maybeBestTarget.get();
