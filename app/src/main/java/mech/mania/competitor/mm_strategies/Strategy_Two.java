@@ -49,21 +49,20 @@ public class Strategy_Two extends Strategy {
         int xIncrement = 3;
         int yIncrement = 5;
 
-        int rows = 30;
-        int columns = 50;
+        int columns = 30;
+        int rows = 50;
 
         manager.utilities.moveToPosition(manager.game_.getGameState().getMyPlayer().getPosition(),
                 new Position(xPos, yPos), new DoNothingDecision()); // should I plant here instead of do nothing
 
         for (int i = 0; i < numberOfPeanutPatches; i++) {
-            if (xPos + xIncrement < rows) {
-                yPos += xIncrement;
+            if (xPos + xIncrement < columns) {
+                xPos += xIncrement;
             }
-            if (xPos + yIncrement < columns / 3) {
-                yPos += yIncrement;
-            } else {
-                yPos -= yIncrement;
+            if (yPos + yIncrement < 2 || yPos + yIncrement > (rows - 2) / 3) {
+                yIncrement *= -1;
             }
+            yPos += yIncrement;
 
             Position currentPosition = new Position(xPos, yPos);
 
