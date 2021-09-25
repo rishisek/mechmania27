@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Bot" type="JarApplication">
+    <option name="JAR_PATH" value="$PROJECT_DIR$/mm27-engine.jar" />
+    <option name="VM_PARAMETERS" value="-Xmx1024m" />
+    <option name="PROGRAM_PARAMETERS" value="-n &quot;team-java&quot; -N &quot;team-python&quot; -e &quot;java -jar ./app/build/libs/mm27-java-sp-1.0-all.jar&quot; -E &quot; java -jar ./app/build/libs/mm27-java-sp-1.0-all.jar&quot;" />
+    <option name="WORKING_DIRECTORY" value="C:\Users\justin\IdeaProjects\mechmania27" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2" />
+  </configuration>
+</component>
