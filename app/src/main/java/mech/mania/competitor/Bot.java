@@ -1,7 +1,6 @@
 package mech.mania.competitor;
 
 import mech.mania.competitor.api.Constants;
-import mech.mania.competitor.api.GameUtil;
 import mech.mania.competitor.mm_core.Manager;
 import mech.mania.competitor.mm_models.TurnState;
 import mech.mania.competitor.mm_models.StartGameConfig;
@@ -38,7 +37,7 @@ public class Bot {
      * @return MoveDecision A location for the bot to move to this turn
      */
     private static MoveDecision getMoveDecision(Game game) {
-        MoveDecision decision = manager.getMoveDecision();
+        MoveDecision decision = manager.nextMoveDecision();
 
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",
@@ -84,7 +83,7 @@ public class Bot {
      * @return ActionDecision A decision for the bot to make this turn
      */
     private static ActionDecision getActionDecision(Game game) {
-        ActionDecision decision = manager.getActionDecision();
+        ActionDecision decision = manager.nextActionDecision();
 
         GameState gameState = game.getGameState();
         logger.debug(String.format("[Turn %d] Feedback received from engine: [%s]",

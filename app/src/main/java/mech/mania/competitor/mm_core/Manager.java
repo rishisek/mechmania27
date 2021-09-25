@@ -33,13 +33,13 @@ public class Manager {
         return new StartGameConfig(ItemType.SCARECROW, UpgradeType.LONGER_LEGS);
     }
 
-    public MoveDecision getMoveDecision() {
+    public MoveDecision nextMoveDecision() {
         // TODO: ideally, pull from queue.
         // TODO: template code, remove.
         return new MoveDecision(new Position(0, 0));
     }
 
-    public ActionDecision getActionDecision() {
+    public ActionDecision nextActionDecision() {
         // TODO: ideally, pull from queue.
         // TODO: template code, remove.
         return new DoNothingDecision();
