@@ -17,14 +17,8 @@ public class Strategy_Two extends Strategy {
     @Override
     public ArrayList<DecisionPair> getDecisions(Manager manager) {
         ArrayList<DecisionPair> pairs = new ArrayList<>();
-        int numberOfPeanutPatches = 7;
 
-        // TODO:: Move from start to buy house
-        /*
-           findClosestPath(currentPosition, futurePosition);
-         */
-
-        // TODO:: Buy peanuts
+        // Buy peanuts
         List<String> peanuts = new ArrayList<>();
         peanuts.add(CropType.PEANUT.toString());
 
@@ -33,46 +27,36 @@ public class Strategy_Two extends Strategy {
         List<Integer> amount = new ArrayList<>();
         amount.add((int)numberOfPeanuts);
 
-        manager.utilities.moveToPosition(manager.game_.getGameState().getMyPlayer().getPosition(),
-                new Position(2, 5), new BuyDecision(peanuts, amount)); // coords of crops
+        pairs.addAll(manager.utilities.moveToPosition(manager.utilities.getNearestGrocer(),
+                new BuyDecision(peanuts, amount)));
 
-        //pairs.add(new DecisionPair(new MoveDecision(), new BuyDecision(peanuts, amount))); // TODO:: add to array
+        // Move in the correct pattern and plant the peanuts
+        int xPos = 11;
+        int yPos = 5;
 
-        // BIG ISSUE^^ I CANT DO JUST AN ACTION AND NOT MOVE, so i made the moveToPosition take in an action
+        int xIncrement = 4;
+        int yIncrement = 4;
 
-        //manager.game_.sendActionDecision(new BuyDecision(peanuts, amount));
+        ArrayList<DecisionPair> temp = manager.utilities.moveToPosition(new Position(xPos, yPos),
+                new DoNothingDecision()); // should I plant here instead of do nothing
 
-        // TODO:: Move in the correct pattern and plant the peanuts
-        int xPos = 5;
-        int yPos = 2;
+        temp.remove(temp.size() - 1);
+        pairs.addAll(temp);
 
-        int xIncrement = 3;
-        int yIncrement = 5;
+        for (int i = 3; i > 0; i--) {
+            for (int j = i; j > 0; j--) {
+                Position currentPosition = new Position(xPos, yPos);
 
-        int columns = 30;
-        int rows = 50;
+                List<Position> positions = new ArrayList<>();
+                positions.add(0, new Position(xPos - 1, yPos - 1));
+                positions.add(1, new Position(xPos + 1, yPos + 1));
+                positions.add(2, new Position(xPos - 1, yPos + 1));
+                positions.add(3, new Position(xPos + 1, yPos - 1));
 
-        manager.utilities.moveToPosition(manager.game_.getGameState().getMyPlayer().getPosition(),
-                new Position(xPos, yPos), new DoNothingDecision()); // should I plant here instead of do nothing
-
-        for (int i = 0; i < numberOfPeanutPatches; i++) {
-            if (xPos + xIncrement < columns) {
+                pairs.add(new DecisionPair(new MoveDecision(currentPosition), new PlantDecision(peanuts, positions)));
                 xPos += xIncrement;
             }
-            if (yPos + yIncrement < 2 || yPos + yIncrement > (rows - 2) / 3) {
-                yIncrement *= -1;
-            }
             yPos += yIncrement;
-
-            Position currentPosition = new Position(xPos, yPos);
-
-            List<Position> positions = new ArrayList<>();
-            positions.add(0, new Position(xPos - 1, yPos - 1));
-            positions.add(1, new Position(xPos + 1, yPos + 1));
-            positions.add(2, new Position(xPos - 1, yPos + 1));
-            positions.add(3, new Position(xPos + 1, yPos - 1));
-
-            pairs.add(new DecisionPair(new MoveDecision(currentPosition), new PlantDecision(peanuts, positions)));
         }
 
         return pairs;
