@@ -7,7 +7,6 @@ import mech.mania.competitor.model.Position;
 import mech.mania.competitor.model.decisions.*;
 import mech.mania.competitor.networking.Logger;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +17,7 @@ public class Strat_Scarecrow extends Strategy {
     ArrayList<DecisionPair> decisions = new ArrayList<>();
 
     // Green Grocer
-    ArrayList<Position> greenGrocerTiles =
-        manager.game_.getGameState().getTileMap().getGreenGrocerTiles();
-    Position closestGrocerTile = getClosestPosition(greenGrocerTiles, manager);
+    Position closestGrocerTile = manager.utilities.getNearestGrocer();
 
     // Buy 25 potatoes needed to grow them around the scarecrow
     List<String> potatoes = new ArrayList<>();
@@ -76,23 +73,6 @@ public class Strat_Scarecrow extends Strategy {
     logger.debug(decisions.toString());
 
     return decisions;
-  }
-
-  public Position getClosestPosition(ArrayList<Position> positions, Manager manager) {
-    Position closestTilePosition = new Position(0, 0);
-
-    // TODO: Need to figure out a better value for this
-    double closestTileDistance = 100;
-
-    for (Position tilePosition : positions) {
-      int distance = manager.utilities.getDistance(tilePosition);
-
-      if (distance < closestTileDistance) {
-        closestTilePosition = tilePosition;
-      }
-    }
-
-    return closestTilePosition;
   }
 
   public List<Position> getChangePositionToPlant() {
