@@ -38,7 +38,7 @@ public class Utilities {
     }
 
     public boolean isPositionValid(Position position) {
-        return GameUtil.distance(myPlayer_.getPosition(), position)
+        return GameUtil.validPosition(position) && GameUtil.distance(myPlayer_.getPosition(), position)
                 <= myPlayer_.getMaxMovement();
     }
 
@@ -93,26 +93,35 @@ public class Utilities {
     }
 
     public int getDistance(Position delta) {
-        return delta.getX() + delta.getY();
+        return Math.abs(delta.getX()) + Math.abs(delta.getY());
     }
 
     public ArrayList<DecisionPair> moveToPosition(Position currentPosition, Position futurePosition,
-                                                  ActionDecision decision) {
+                                                  ActionDecision actionDecision) {
         ArrayList<DecisionPair> pair = new ArrayList<>();
 
-        int xDiff = futurePosition.getX() - currentPosition.getX();
-        int yDiff = futurePosition.getY() - currentPosition.getY();
+        Position movedPosition = currentPosition;
+        while (movedPosition != futurePosition) {
+            Position delta = getRelativePosition(movedPosition, futurePosition);
 
-        int newXPosition = currentPosition.getX() + xDiff;
-        int newYPosition = currentPosition.getY() + yDiff;
+            int maxMoves = myPlayer_.getMaxMovement();
 
-        // make case for 20+ squares
+            if (getDistance(delta) <= maxMoves) {
+                pair.add(new DecisionPair(new MoveDecision(futurePosition), actionDecision));
+                break;
+            }
 
-        pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, currentPosition.getY())),
-                    new DoNothingDecision()));
-        pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, newYPosition)),
-                decision));
+            int deltaX = delta.getX();
+            int deltaY = delta.getY();
 
+            int newDeltaX = (deltaX < 0 ? -1 : 1) * Math.min(Math.abs(deltaX), maxMoves);
+            int newDeltaY = (deltaY < 0 ? -1 : 1) * Math.min(Math.abs(deltaY), maxMoves - Math.abs(newDeltaX));
+
+            movedPosition = new Position(movedPosition.getX() + newDeltaX,
+                    movedPosition.getY() + newDeltaY);
+
+            pair.add(new DecisionPair(new MoveDecision(movedPosition), new DoNothingDecision()));
+        }
 
         return pair;
     }
