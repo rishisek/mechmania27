@@ -93,8 +93,10 @@ public class Bot {
             } catch (IOException e) {
                 System.exit(-1);
             }
+            DecisionPair decision = manager.nextDecision();
+
             manager.setTurnState(TurnState.Move);
-            game.sendMoveDecision(getMoveDecision(game));
+            game.sendMoveDecision(decision.moveDecision);
 
             // Turn part 2: Action Decision
             try {
@@ -103,8 +105,9 @@ public class Bot {
             } catch (IOException e) {
                 System.exit(-1);
             }
+
             manager.setTurnState(TurnState.Action);
-            game.sendActionDecision(getActionDecision(game));
+            game.sendActionDecision(decision.actionDecision);
         }
     }
 }

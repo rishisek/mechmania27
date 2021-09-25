@@ -14,6 +14,8 @@ public class TopLevelStrategy extends Strategy {
   private static final Logger logger = new Logger();
 
   enum Phase { SCARECROW_PLANT, PEANUT_PLANT, TWO_PLOT, HARVEST}
+  private boolean onlyHarvest = false;
+
 
   private Strategy getStrategy(Phase phase){
      switch(phase) {
@@ -30,30 +32,35 @@ public class TopLevelStrategy extends Strategy {
   @Override
   public ArrayList<DecisionPair> getDecisions(Manager manager) {
     ArrayList<DecisionPair> decisions = new ArrayList<>();
-//
-//    if (manager.game_.getGameState().getOpponentPlayer().getItem()
-//        == ItemType.SCARECROW.toString()) {
-//      if (manager.game_.getGameState().getOpponentPlayer().getUpgrade()
-//          == UpgradeType.LONGER_LEGS.toString()) {
-//        if (!manager.opponentTracker.hasOpponentSpentEver) {
-//          decisions.add(
-//              new DecisionPair(
-//                  new MoveDecision(manager.game_.getGameState().getMyPlayer().getPosition()),
-//                  new DoNothingDecision()));
-//          return decisions;
-//        } else {
-//          // Do scarecrow
-//          decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
-//        }
-//      } else {
-//        // Do two plot.
-//      }
-//    } else {
-//      decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
-//
-//      // Do peanut grief.
-//      decisions.addAll(getDecisionsForStrategy(Phase.PEANUT_PLANT,manager));
-//    }
+
+    if (!onlyHarvest) {
+      if (manager.game_.getGameState().getOpponentPlayer().getItem()
+          == ItemType.SCARECROW.toString()) {
+        if (manager.game_.getGameState().getOpponentPlayer().getUpgrade()
+            == UpgradeType.LONGER_LEGS.toString()) {
+          if (!manager.opponentTracker.hasOpponentSpentEver) {
+            decisions.add(
+                new DecisionPair(
+                    new MoveDecision(manager.game_.getGameState().getMyPlayer().getPosition()),
+                    new DoNothingDecision()));
+            return decisions;
+          } else {
+            // Do scarecrow
+            decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
+            onlyHarvest = true;
+          }
+        } else {
+          // Do two plot.
+        }
+      } else {
+        decisions.addAll(getDecisionsForStrategy(Phase.SCARECROW_PLANT, manager));
+
+        // Do peanut grief.
+        decisions.addAll(getDecisionsForStrategy(Phase.PEANUT_PLANT, manager));
+
+        onlyHarvest = true;
+      }
+    }
 
     decisions.addAll(getDecisionsForStrategy(Phase.HARVEST, manager));
 

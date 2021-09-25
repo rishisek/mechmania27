@@ -8,6 +8,7 @@ import mech.mania.competitor.model.decisions.*;
 import mech.mania.competitor.networking.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Strat_Scarecrow extends Strategy {
@@ -29,6 +30,8 @@ public class Strat_Scarecrow extends Strategy {
     decisions.add(
         new DecisionPair(new MoveDecision(closestGrocerTile), new BuyDecision(potatoes, amount)));
 
+
+    // Scarecrows
     Position currentPosition = closestGrocerTile;
 
     //New Middle Scarecrow
@@ -36,20 +39,20 @@ public class Strat_Scarecrow extends Strategy {
 
     int distanceToMiddleScarecrow = manager.utilities.getDistance(middleScarecrowPosition);
 
-    if (distanceToMiddleScarecrow > 20) {
-      decisions.add(
-          new DecisionPair(
-              new MoveDecision(
-                  new Position(
-                          middleScarecrowPosition.getX(),
-                      currentPosition.getY()
-                          + 20
-                          - middleScarecrowPosition.getX()
-                          + currentPosition.getX())),
-              new DoNothingDecision()));
-    } else {
-      decisions.add(new DecisionPair(new MoveDecision(middleScarecrowPosition), new UseItemDecision()));
+    // Move to the nearest scarecrow and place the scarecrow
+    int distanceToClosestScarecrow = manager.utilities.getRelativeDistance(currentPosition, middleScarecrowPosition);
+    while (distanceToClosestScarecrow > 20) {
+      currentPosition =
+          new Position(
+              middleScarecrowPosition.getX(),
+              currentPosition.getY() + 20 - middleScarecrowPosition.getX() + currentPosition.getX());
+      decisions.add(new DecisionPair(new MoveDecision(currentPosition), new DoNothingDecision()));
+      distanceToClosestScarecrow = manager.utilities.getRelativeDistance(currentPosition, middleScarecrowPosition);
+      logger.debug(Integer.toString(distanceToClosestScarecrow));
     }
+
+    logger.debug("kkkkkkkkkkkkkkkkkkkk");
+    decisions.add(new DecisionPair(new MoveDecision(middleScarecrowPosition), new UseItemDecision()));
 
     // TODO: Write method to plant the potatoes in a surrounding border, make a double for loop for
     // the diff changes
@@ -57,17 +60,16 @@ public class Strat_Scarecrow extends Strategy {
     List<Position> potatoPositions = getPotatoPositionToPlant();
 
     currentPosition = middleScarecrowPosition;
-
-    for (Position position : changePositionsToPlant) {
-      int tempCurrentPositionX = currentPosition.getX() + position.getX();
-      int tempCurrentPositionY = currentPosition.getY() + position.getY();
+    for (int i = 0; i < changePositionsToPlant.size(); i++) {
+      int tempCurrentPositionX = currentPosition.getX() + changePositionsToPlant.get(i).getX();
+      int tempCurrentPositionY = currentPosition.getY() + changePositionsToPlant.get(i).getY();
 
       currentPosition = new Position(tempCurrentPositionX, tempCurrentPositionY);
 
       decisions.add(
-              new DecisionPair(
-                      new MoveDecision(currentPosition),
-                      new PlantDecision(potatoes, potatoPositions)));
+          new DecisionPair(
+              new MoveDecision(currentPosition),
+              new PlantDecision(potatoes, potatoPositions)));
     }
 
     logger.debug(decisions.toString());
