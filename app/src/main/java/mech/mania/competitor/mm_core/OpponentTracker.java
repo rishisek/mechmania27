@@ -43,7 +43,7 @@ public class OpponentTracker {
     public int previousAmountSpent = 0;
 
     public OpponentTracker() {
-
+        pastDistances =  new ArrayList<>();
     }
 
     public void update(Game game, Utilities utilities) {
