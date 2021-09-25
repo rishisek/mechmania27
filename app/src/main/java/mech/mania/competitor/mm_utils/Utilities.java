@@ -95,7 +95,7 @@ public class Utilities {
         // make case for 20+ squares
 
         pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, currentPosition.getY())),
-                    decision));
+                    new DoNothingDecision()));
         pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, newYPosition)),
                 decision));
 
