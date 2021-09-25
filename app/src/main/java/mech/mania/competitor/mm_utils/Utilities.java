@@ -9,6 +9,7 @@ import mech.mania.competitor.model.decisions.DoNothingDecision;
 import mech.mania.competitor.model.decisions.MoveDecision;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Utilities {
     private Game game_;
@@ -29,6 +30,11 @@ public class Utilities {
 
     public static UpgradeType getUpgrade(String upgrade) {
         return UpgradeType.valueOf(upgrade);
+    }
+
+    public Position getNearestGrocer() {
+        return gameState_.getTileMap().getGreenGrocerTiles().stream()
+                .min(Comparator.comparingInt(this::getRelativeDistance)).get();
     }
 
     public boolean isPositionValid(Position position) {
@@ -76,6 +82,14 @@ public class Utilities {
     public Position getRelativePosition(Position from, Position to) {
         return new Position(to.getX() - from.getX(),
                 to.getY() - from.getY());
+    }
+
+    public int getRelativeDistance(Position position) {
+        return getDistance(getRelativePosition(position));
+    }
+
+    public int getRelativeDistance(Position from, Position to) {
+        return getDistance(getRelativePosition(from, to));
     }
 
     public int getDistance(Position delta) {
