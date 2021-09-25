@@ -2,7 +2,10 @@ package mech.mania.competitor.mm_utils;
 
 import mech.mania.competitor.Game;
 import mech.mania.competitor.api.GameUtil;
+import mech.mania.competitor.mm_models.DecisionPair;
 import mech.mania.competitor.model.*;
+import mech.mania.competitor.model.decisions.ActionDecision;
+import mech.mania.competitor.model.decisions.DoNothingDecision;
 import mech.mania.competitor.model.decisions.MoveDecision;
 
 import java.util.ArrayList;
@@ -77,5 +80,26 @@ public class Utilities {
 
     public int getDistance(Position delta) {
         return delta.getX() + delta.getY();
+    }
+
+    public ArrayList<DecisionPair> moveToPosition(Position currentPosition, Position futurePosition,
+                                                  ActionDecision decision) {
+        ArrayList<DecisionPair> pair = new ArrayList<>();
+
+        int xDiff = futurePosition.getX() - currentPosition.getX();
+        int yDiff = futurePosition.getY() - currentPosition.getY();
+
+        int newXPosition = currentPosition.getX() + xDiff;
+        int newYPosition = currentPosition.getY() + yDiff;
+
+        // make case for 20+ squares
+
+        pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, currentPosition.getY())),
+                    decision));
+        pair.add(new DecisionPair(new MoveDecision(new Position(newXPosition, newYPosition)),
+                decision));
+
+
+        return pair;
     }
 }
