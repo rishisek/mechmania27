@@ -16,6 +16,12 @@ public class Manager {
 
     public OpponentTracker opponentTracker = new OpponentTracker();
 
+    // TODO: store current strategy used here.
+    // TODO: store queue of decisions here, make a mm_models containing both Move Action Decision Pair.
+
+    // TODO: write code to switch strategies.
+    // TODO: implement the strategy abstract class, and the individual strategies
+
     private Game game_;
     private TurnState turnState_;
 
@@ -28,11 +34,13 @@ public class Manager {
     }
 
     public MoveDecision getMoveDecision() {
+        // TODO: ideally, pull from queue.
         // TODO: template code, remove.
         return new MoveDecision(new Position(0, 0));
     }
 
     public ActionDecision getActionDecision() {
+        // TODO: ideally, pull from queue.
         // TODO: template code, remove.
         return new DoNothingDecision();
     }
@@ -42,6 +50,8 @@ public class Manager {
 
         utilities = new Utilities(game);
         opponentTracker.update(game, utilities);
+
+        // TODO: you should check and update strategy here, or in a helper function you call here.
     }
 
     public void setTurnState(TurnState turnState) {
